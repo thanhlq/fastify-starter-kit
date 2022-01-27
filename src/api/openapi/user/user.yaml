@@ -1,0 +1,31 @@
+post:
+  tags:
+    - User
+  summary: Register user
+  operationId: addUser
+  requestBody:
+    content:
+      "application/json":
+        description: User object that needs to be registered
+        required: true
+        schema:
+          $ref: "../components.yaml#/components/definitions/RegisterUser"
+  responses:
+    "200":
+      $ref: "../components.yaml#/components/responses/handleHeaderAccept"
+get:
+  security:
+    - bearerAuth: []
+  tags:
+    - User
+  summary: Get user by ids
+  operationId: getUserByIds
+  parameters:
+    - in: query
+      name: ids
+      type: string
+      required: true
+      description: 25,50,100
+  responses:
+    "200":
+      $ref: "../components.yaml#/components/responses/handleHeaderAccept"

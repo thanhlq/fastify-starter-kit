@@ -1,0 +1,6 @@
+{
+  "id": {
+    "type": "string",
+    "description": "for example, user id"
+  }
+}

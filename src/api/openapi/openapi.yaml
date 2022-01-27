@@ -1,0 +1,298 @@
+openapi: 3.1.0
+info:
+  "description": default service.
+  "version": 1.0.0
+  "title": API SYSTEM SERVICES
+servers:
+  - url: http://localhost:30006/api
+    description: Development server
+paths:
+  #For Admin paths:
+  /user/auth:
+    $ref: ./admin/auth.yaml
+  /admin/auth/logout:
+    $ref: ./admin/logout.yaml
+  /admin:
+    $ref: ./admin/admin.yaml
+  /admin/otp:
+    $ref: ./admin/admin_otp.yaml
+  /admin/otp/verify:
+    $ref: ./admin/otp_verify.yaml
+  /admin/changePassword:
+    $ref: ./admin/change_password.yaml
+  /admin/search:
+    $ref: ./admin/search.yaml
+  /admin/{adminId}:
+    $ref: ./admin/admin_id.yaml
+  /admin/avatar:
+    $ref: ./admin/avatar.yaml
+  /admin/heart-rate/generate-hrzone:
+    $ref: ./admin/generate_hrzone.yaml
+
+  #For User Authentication paths:
+  /auth:
+    $ref: ./user_auth/auth.yaml
+  /auth/logout:
+    $ref: ./user_auth/logout.yaml
+  /auth/social:
+    $ref: ./user_auth/social.yaml
+  /auth/refresh:
+    $ref: ./user_auth/refresh.yaml
+
+  #For User paths:
+  /users:
+    $ref: ./user/user.yaml
+  /users/role:
+    $ref: ./user/role.yaml
+  /users/search:
+    $ref: ./user/search.yaml
+  /users/countries:
+    $ref: ./user/countries.yaml
+  /users/country/chart:
+    $ref: ./user/country_chart.yaml
+  /users/analyze/{fromDate}/{toDate}:
+    $ref: ./user/user_analyze.yaml
+  /users/{userId}/changepassword:
+    $ref: ./user/changePassword.yaml
+  /users/forgotaccount:
+    $ref: ./user/forgotAccount.yaml
+  /users/{userId}:
+    $ref: ./user/user_update.yaml
+  /users/harddelete/{userId}:
+    $ref: ./user/hard_delete.yaml
+  /users/avatar:
+    $ref: ./user/avatar.yaml
+  /users/config:
+    $ref: ./user/config.yaml
+  /users/weights:
+    $ref: ./user/weights.yaml
+  /users/{userId}/weight/{fromDate}/{toDate}:
+    $ref: ./user/userId_weights.yaml
+  /users/{userId}/weight/chart/{fromDate}/{toDate}:
+    $ref: ./user/userId_weights_chart.yaml
+  /users/forgotPassword:
+    $ref: ./user/forgotPsw.yaml
+  /users/{userId}/dashboard/overview/{date}:
+    $ref: ./user/overview.yaml
+  /users/{userId}/dashboard/recent-measurement/{date}:
+    $ref: ./user/userId_recent_measurement.yaml
+  /v2/users/{userId}/weight/{fromDate}/{toDate}:
+    $ref: ./user/v2_userId_past_weight_ins.yaml
+  /users/{userId}/weight/dashboard/{date}:
+    $ref: ./user/userId_weights_dashboard.yaml
+
+  #For Config paths:
+  /config:
+    $ref: ./config/config_post.yaml
+  /config/deviceModel:
+    $ref: ./config/config_device.yaml
+  /config/deviceModel/{modelId}:
+    $ref: ./config/config_device_id.yaml
+  /config/deviceModel/activeList:
+    $ref: ./config/config_device_activeList.yaml
+  /config/deviceModel/allModels:
+    $ref: ./config/config_device_allModels.yaml
+  /config/swagger:
+    $ref: ./config/config_swagger.yaml
+
+  #For Upload File paths:
+  /config/files/uploadfile:
+    $ref: ./uploadFile/uploadFile.yaml
+  /config/firmwares/upload:
+    $ref: ./uploadFile/uploadFirmware.yaml
+
+  #For User Activity paths:
+  /users/activity:
+    $ref: ./user_activity/user_activity.yaml
+  /users/activity/{id}:
+    $ref: ./user_activity/user_activity_id.yaml
+  /users/{userId}/activity/{id}:
+    $ref: ./user_activity/get_activity_by_id.yaml
+  /users/{userId}/activity/overview/{date}:
+    $ref: ./user_activity/overview.yaml
+  /users/{userId}/activity/session/summary/{date}:
+    $ref: ./user_activity/session_summary.yaml
+  /users/{userId}/activity/{fromDate}/{toDate}:
+    $ref: ./user_activity/userId_activity.yaml
+  /users/{userId}/activity/calories-burned/{date}:
+    $ref: ./user_activity/userId_calories-burned.yaml
+  /users/{userId}/activity/calories-burned/logs/{fromDate}/{toDate}:
+    $ref: ./user_activity/calories-burned_logs.yaml
+  /users/{userId}/activity/steps/logs/{fromDate}/{toDate}:
+    $ref: ./user_activity/steps_logs.yaml
+  /users/{userId}/activity/steps/overview/{date}:
+    $ref: ./user_activity/steps_overview.yaml
+  /users/{userId}/activity/active-minutes/overview/{date}:
+    $ref: ./user_activity/active-minutes_overview.yaml
+  /users/activity/training-plan:
+    $ref: ./user_activity/training-plan.yaml
+  /users/{userId}/activity/training-plan:
+    $ref: ./user_activity/userId_training-plan.yaml
+  /users/{userId}/activity/active-minutes/logs/{fromDate}/{toDate}:
+    $ref: ./user_activity/active-minutes_logs.yaml
+  /users/{userId}/activity/workout/past/logs:
+    $ref: ./user_activity/workout_logs.yaml
+  /users/{userId}/activity/calories-burned/chart/{fromDate}/{toDate}:
+    $ref: ./user_activity/calories-burned_chart.yaml
+  /users/{userId}/activity/activity-step/chart/{fromDate}/{toDate}:
+    $ref: ./user_activity/userId_activity-step_chart.yaml
+  /users/{userId}/activity/active-minutes/chart/{fromDate}/{toDate}:
+    $ref: ./user_activity/userId_activity-active_minutes_chart.yaml
+  /users/activity/training-activity:
+    $ref: ./user_activity/training-activity.yaml
+  /users/activity/gps:
+    $ref: ./user_activity/gps-data.yaml
+  /users/activity/token:
+    $ref: ./user_activity/activity_token.yaml
+
+  #For User Device paths:
+  /users/device:
+    $ref: ./user_device/user_device.yaml
+  /users/{userId}/device:
+    $ref: ./user_device/userId_device.yaml
+  /users/device/ota/{model_id}:
+    $ref: ./user_device/ota.yaml
+  /users/device/analyze/{fromDate}/{toDate}:
+    $ref: ./user_device/analyze.yaml
+  /v2/users/device/ota/{model_id}:
+    $ref: ./user_device/v2_ota.yaml
+
+  #For User FCM paths:
+  /users/fcm/register:
+    $ref: ./user_fcm/user_fcm.yaml
+
+  #For Feedback paths:
+  /users/feedback/create_feedback:
+    $ref: ./feedback/create_feedback.yaml
+  /users/feedback/list:
+    $ref: ./feedback/list_feedback.yaml
+  /users/feedback/create_with_log:
+    $ref: ./feedback/create_feedback_with_log.yaml
+  /users/feedback/list_with_log:
+    $ref: ./feedback/list_feedback_with_log.yaml
+
+  #For User Goal paths:
+  /users/goals:
+    $ref: ./user_goal/user_goal.yaml
+  /users/{userId}/goals/{fromDate}/{toDate}:
+    $ref: ./user_goal/userId_goal.yaml
+  /users/{userId}/goals/latest/{date}:
+    $ref: ./user_goal/userId_goals_latest.yaml
+
+  #For User Heart Rate paths:
+  /users/heart-rate:
+    $ref: ./user_heart_rate/heart-rate.yaml
+  /users/heart-rate/hrv-baseline:
+    $ref: ./user_heart_rate/hrv-baseline.yaml
+  /users/{userId}/heart-rate/dashboard:
+    $ref: ./user_heart_rate/dashboard.yaml
+  /users/{userId}/heart-rate/{fromDate}/{toDate}:
+    $ref: ./user_heart_rate/userId_heart_rate.yaml
+  /users/{userId}/heart-rate:
+    $ref: ./user_heart_rate/delete.yaml
+  /users/{userId}/heart-rate/analyze/{fromDate}/{toDate}:
+    $ref: ./user_heart_rate/analyze.yaml
+  /users/{userId}/heart-rate/dummy/{fromDate}/{toDate}:
+    $ref: ./user_heart_rate/dummy.yaml
+  /users/heart-rate/ecg/:
+    $ref: ./user_heart_rate/ecg.yaml
+  /users/{userId}/heart-rate/hrv-carousels:
+    $ref: ./user_heart_rate/hrv-carousels.yaml
+  /users/{userId}/heart-rate/healthAnalyze:
+    $ref: ./user_heart_rate/healthAnalyze.yaml
+  /users/{userId}/heart-rate/ecg/{fromDate}/{toDate}:
+    $ref: ./user_heart_rate/userId_ecg.yaml
+  /users/{userId}/heart-rate/ecg/dummy/{fromDate}/{toDate}:
+    $ref: ./user_heart_rate/userId_ecg_dummy.yaml
+  /users/{userId}/heart-rate/ecg:
+    $ref: ./user_heart_rate/userId_ecg_delete.yaml
+  /users/{userId}/heart-rate/detail/{date}:
+    $ref: ./user_heart_rate/userId_detail.yaml
+
+  #For Measurement paths
+  /users/measurement:
+    $ref: ./user_measurement/user_measurement.yaml
+  /users/{userId}/measurement/dummy/{fromDate}/{toDate}:
+    $ref: ./user_measurement/userId_measurement_dummy.yaml
+  /users/{userId}/measurement/{fromDate}/{toDate}:
+    $ref: ./user_measurement/userId_measurement.yaml
+  /users/{userId}/measurement:
+    $ref: ./user_measurement/userId_delete_measurement.yaml
+  /users/{userId}/measurement/hard-delete:
+    $ref: ./user_measurement/hard-delete.yaml
+
+  #For OTP paths
+  /users/otp:
+    $ref: ./otp/otp.yaml
+  /users/test_send_email:
+    $ref: ./otp/test_send_email.yaml
+  /users/otp/verify:
+    $ref: ./otp/verify.yaml
+
+  #For user sleeps paths:
+  /users/sleeps:
+    $ref: ./user_sleep/sleeps.yaml
+  /users/sleeps/dummy/{fromDate}/{toDate}:
+    $ref: ./user_sleep/dummy_sleeps.yaml
+  /users/{userId}/sleeps/detail/{date}:
+    $ref: ./user_sleep/sleeps_detail.yaml
+  /users/{userId}/sleeps/{fromDate}/{toDate}:
+    $ref: ./user_sleep/userId_sleeps.yaml
+  /users/{userId}/sleeps/chart/{fromDate}/{toDate}:
+    $ref: ./user_sleep/sleeps_chart.yaml
+  /users/{userId}/sleeps/heart-rate-charts/{fromDate}/{toDate}:
+    $ref: ./user_sleep/sleeps_heart-rate-charts.yaml
+  /users/{userId}/sleeps/score/chart/{fromDate}/{toDate}:
+    $ref: ./user_sleep/score_chart.yaml
+  /users/score/most-people:
+    $ref: ./user_sleep/most-people.yaml
+  /users/{userId}/sleeps/timeline/assessment/{date}:
+    $ref: ./user_sleep/timeline_assessment.yaml
+  /users/{userId}/sleeps/sleeping-heart-rate/chart/{date}:
+    $ref: ./user_sleep/sleeping-heart-rate-chart.yaml
+
+  #For user wellness paths:
+  /users/wellness:
+    $ref: ./user_wellness/wellness.yaml
+  /users/wellness/water:
+    $ref: ./user_wellness/water.yaml
+  /users/{userId}/wellness/water/{date}:
+    $ref: ./user_wellness/userId_water.yaml
+  /users/{userId}/wellness/{fromDate}/{toDate}:
+    $ref: ./user_wellness/userId_wellness.yaml
+  /users/{userId}/wellness/dummy/{fromDate}/{toDate}:
+    $ref: ./user_wellness/userId_wellness_dummy.yaml
+  /users/{userId}/wellness/relaxation/{fromDate}/{toDate}:
+    $ref: ./user_wellness/relaxation.yaml
+  /users/{userId}/wellness/overview/{date}:
+    $ref: ./user_wellness/overview.yaml
+  /users/wellness/syncmenstrualcycles:
+    $ref: ./user_wellness/syncmenstrualcycles.yaml
+  /users/wellness/menstrualcycle:
+    $ref: ./user_wellness/menstrualcycle.yaml
+  /users/{userId}/wellness/menstrualcycle:
+    $ref: ./user_wellness/userId_menstrualcycle.yaml
+  /users/{userId}/wellness/menstrualcycle/dummy/{fromDate}/{toDate}:
+    $ref: ./user_wellness/userId_menstrualcycle_dummy.yaml
+  /users/{userId}/wellness/menstrualcycle/{fromDate}/{toDate}:
+    $ref: ./user_wellness/getUserMenstrualLogs.yaml
+  /users/{userId}/wellness/menstrualcycles/overview/{date}:
+    $ref: ./user_wellness/menstrualcycles_overview.yaml
+  /users/{userId}/wellness/hydration-chart/{fromDate}/{toDate}:
+    $ref: ./user_wellness/userId_hydration_chart.yaml
+  /users/{userId}/wellness/stress-level/chart/{fromDate}/{toDate}:
+    $ref: ./user_wellness/userId_stress_level_chart.yaml
+  /v2/users/{userId}/wellness/overview/{date}:
+    $ref: ./user_wellness/v2_userId_overview.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT # optional, for documentation purposes only
+      description: "Only Enter Token"
+    time-zone:
+      type: apiKey
+      in: header
+      name: time-zone
+      description: 'http://worldtimeapi.org/timezones, example: Asia/Ho_Chi_Minh'

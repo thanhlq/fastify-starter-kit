@@ -1,0 +1,37 @@
+# POST /users/searchget:
+  security:
+    - bearerAuth: []
+  tags:
+    - User
+  summary: Search user by name
+  operationId: userSearch
+  parameters:
+    - in: query
+      name: search
+      type: string
+    - in: query
+      name: limit
+      type: integer
+    - in: query
+      name: page
+      type: integer
+      description: The first page is number 1
+    - in: query
+      name: role
+      type: integer
+      description: Role to filter. All is -1 or null
+    - in: query
+      name: order
+      type: string
+      description: asc or desc
+    - in: query
+      name: orderBy
+      type: string
+      description: fieldName to order
+    - in: query
+      name: resultType
+      type: string
+      description: To export CSV file send csv, default is json
+  responses:
+    "200":
+      $ref: "../components.yaml#/components/responses/handleHeaderAccept"
