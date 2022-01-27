@@ -1,0 +1,14 @@
+properties:
+  date:
+    type: string
+    example: "2021-08-01"
+  flow:
+    type: string
+    example: No Flow
+  symptom:
+    type: array
+    example:
+      - Breast Pain
+  note:
+    type: string
+    example: note here

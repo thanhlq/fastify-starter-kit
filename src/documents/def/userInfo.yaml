@@ -1,0 +1,73 @@
+type: object
+properties:
+  first_name:
+    type: string
+    required: true
+    example: David
+  last_name:
+    type: string
+    required: true
+    example: Larry
+  phone:
+    type: string
+    required: true
+    example: "0903321842"
+  phone_ext:
+    type: string
+    required: true
+    example: "+84"
+  address:
+    type: string
+    required: true
+    example: Mitalab building, Cong Hoa
+  city:
+    type: string
+    required: true
+    example: HCM
+  zip:
+    type: string
+    example: "700000"
+  state:
+    type: string
+    description: State code
+    required: true
+    example: HCM
+  country:
+    type: string
+    description: Country code
+    required: true
+    example: VN
+  height:
+    type: integer
+    required: true
+    example: 165
+  height_unit:
+    type: string
+    enum:
+      - M
+      - I
+    required: true
+  weight:
+    type: integer
+    required: true
+    example: 76000
+  weight_unit:
+    type: string
+    enum:
+      - K
+      - P
+    required: true
+  gender:
+    type: string
+    enum:
+      - "0"
+      - "1"
+      - "2"
+    required: true
+  birth_date:
+    type: string
+    description: YYYY-MM-DD
+    required: true
+    example: "1990-02-23"
+xml:
+  name: UserInfo

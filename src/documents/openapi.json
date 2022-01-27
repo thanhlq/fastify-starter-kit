@@ -1,0 +1,107 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "description": "Globics default service.",
+    "version": "1.0.0",
+    "title": "Globics API SYSTEM SERVICES"
+  },
+  "servers": [
+    {
+      "url": "https://xzg90k1txj.execute-api.ap-southeast-1.amazonaws.com/api",
+      "description": "Staging server"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Register user",
+        "operationId": "addUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/registerUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/handleHeaderAccept"
+          }
+        }
+      },
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user by ids",
+        "operationId": "getUserByIds",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "ids",
+            "required": true,
+            "description": "25,50,100",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/handleHeaderAccept"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Only Enter Token"
+      },
+      "time-zone": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "time-zone",
+        "description": "http://worldtimeapi.org/timezones, example: Asia/Ho_Chi_Minh"
+      }
+    },
+    "responses": {
+      "handleHeaderAccept": {
+        "description": "abc",
+        "content": {
+          "application/json": {
+            "schema": {}
+          }
+        }
+      }
+    },
+    "schemas": {
+      "registerUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "hai.tran@gmail.com"
+          }
+        },
+        "xml": {
+          "name": "RegisterUser"
+        }
+      }
+    }
+  }
+}

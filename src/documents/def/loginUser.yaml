@@ -1,0 +1,13 @@
+type: object
+properties:
+  email:
+    type: string
+    example: thanhlq@gmail.com
+  password:
+    type: string
+    example: 12345678@21
+  otp_code:
+    type: integer
+    example: 1234
+xml:
+  name: LoginUser

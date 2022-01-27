@@ -1,0 +1,25 @@
+openapi: 3.0.3
+info:
+  "description": default service.
+  "version": 1.0.0
+  "title": API SYSTEM SERVICES
+servers:
+  - url: http://localhost
+    description: Staging server
+paths:
+  #For User paths:
+  /users:
+    $ref: ./v1/user/user.yaml
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT # optional, for documentation purposes only
+      description: "Only Enter Token"
+    time-zone:
+      type: apiKey
+      in: header
+      name: time-zone
+      description: 'http://worldtimeapi.org/timezones, example: Asia/Ho_Chi_Minh'

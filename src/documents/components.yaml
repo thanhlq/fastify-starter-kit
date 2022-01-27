@@ -1,0 +1,21 @@
+components:
+  definitions:
+    RegisterUser:
+      $ref: ./def/registerUser.yaml
+    LoginUser:
+      $ref: ./def/loginUser.yaml
+    UserInfo:
+      $ref: ./def/userInfo.yaml
+  schemas:
+    "304":
+      $ref: ./schemas/error304.yaml
+    datePeriod:
+      $ref: ./schemas/datePeriod.yaml
+    pagination:
+      $ref: ./schemas/pagination.yaml
+  responses:
+    handleHeaderAccept:
+      description: abc
+      content:
+        "application/json":
+          schema: {}

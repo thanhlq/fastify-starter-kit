@@ -1,0 +1,13 @@
+properties:
+  page:
+    type: number
+    example: 1
+  pageSize:
+    type: number
+    example: 10
+  rowCount:
+    type: number
+    example: 197
+  pageCount:
+    type: number
+    example: 20

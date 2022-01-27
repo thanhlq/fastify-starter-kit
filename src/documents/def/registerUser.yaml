@@ -1,0 +1,7 @@
+type: object
+properties:
+  email:
+    type: string
+    example: hai.tran@gmail.com
+xml:
+  name: RegisterUser
