@@ -33,3 +33,4 @@
 * [X] OpenAPI 3.0 documentation
 * [] DB Integration with Knex / objection
 * [X] Localhost development env
+* [] DB unit test with FB jest
