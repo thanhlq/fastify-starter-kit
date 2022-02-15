@@ -1,5 +1,11 @@
 # Fastify & Typescript App
 
+##  FEATURES
+
+* Fastify as core
+* Typescript
+* Sql builder with objection / knex
+
 ## Installation
 
 ```bash
@@ -11,6 +17,7 @@ $ yarn install
 ## Usage
 
 ### Development
+
 ```bash
 # Required: typescript watch compilation
 $ yarn watch
@@ -31,3 +38,14 @@ $ yarn build
 # start production app
 $ yarn start
 ```
+
+### OPENAPI Document
+
+To generate latest openapi (swagger) docs:
+
+```bash
+cd src/documents
+./generate-openapi.json.sh
+```
+
+go to http://localhost:3006/api-docs/
