@@ -14,6 +14,6 @@ export default async function indexController(fastify: FastifyInstance) {
       reply
         .header('Content-Type', 'text/html; charset=utf-8')
         .send(indexHtmlContent);
-    }
+    },
   );
 }

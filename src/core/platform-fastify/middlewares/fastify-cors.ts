@@ -12,16 +12,16 @@ const FastifyCors = (fastify: FastifyInstance) => {
   fastify.register(fastifyCors, () => {
     return (req, cb) => {
       let corsOptions;
-      const origin = req.headers.origin || ''
+      const origin = req.headers.origin || '';
       // do not include CORS headers for requests from localhost
       if (/localhost/.test(origin)) {
-        corsOptions = { origin: false }
+        corsOptions = { origin: false };
       } else {
-        corsOptions = { origin: true }
+        corsOptions = { origin: true };
       }
-      cb(null, corsOptions)
-    }
-  })
-}
+      cb(null, corsOptions);
+    };
+  });
+};
 
-export default FastifyCors
+export default FastifyCors;

@@ -1,3 +1,6 @@
+import { nanoid } from 'nanoid'
+import {v4 as uuidv4} from 'uuid'
+
 /* eslint-disable @typescript-eslint/no-use-before-define */
 export const isUndefined = (obj: any): obj is undefined =>
   typeof obj === 'undefined';
@@ -20,7 +23,7 @@ export const isPlainObject = (fn: any): fn is object => {
     typeof ctor === 'function' &&
     ctor instanceof ctor &&
     Function.prototype.toString.call(ctor) ===
-      Function.prototype.toString.call(Object)
+    Function.prototype.toString.call(Object)
   );
 };
 
@@ -55,3 +58,5 @@ export const isNil = (val: any): val is null | undefined =>
   isUndefined(val) || val === null;
 export const isEmpty = (array: any): boolean => !(array && array.length > 0);
 export const isSymbol = (val: any): val is symbol => typeof val === 'symbol';
+export const nanoId = (): string => { return nanoid() }
+export const uuid = (): string => { return uuidv4() }

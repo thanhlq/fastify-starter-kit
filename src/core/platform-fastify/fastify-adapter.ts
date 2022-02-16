@@ -1,13 +1,25 @@
 // @author: Thanh LE thanhlq@gmail.com
 // Last update: 2022/01/17
-
-import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
+import fastify, {
+  FastifyInstance,
+  FastifyReply,
+  FastifyRequest,
+} from 'fastify';
 import { IncomingHttpHeaders } from 'http';
 import qs from 'qs';
-import { HttpHandlerFn, HttpHandlerFnNull, HttpPluginOptions, HttpRoute, IHttpServer, IHttpServerFactory, IHttpRequest, IHttpResponse } from '../interfaces/http';
-import pino from 'pino'
+import {
+  HttpHandlerFn,
+  HttpHandlerFnNull,
+  HttpPluginOptions,
+  HttpRoute,
+  IHttpServer,
+  IHttpServerFactory,
+  IHttpRequest,
+  IHttpResponse,
+} from '../interfaces/http';
+import pino from 'pino';
 import * as constants from '../constants';
-import {setupMiddlewares} from './middlewares/middlewares'
+import { setupMiddlewares } from './middlewares/middlewares';
 
 const env = process.env;
 export const environment = env.NODE_ENV;
@@ -19,14 +31,16 @@ export const InitLogger = () => {
   if (!isProduction) {
     const transport = pino.transport({
       target: 'pino-pretty',
-      options: { colorize: true }
-    })
-    logger = pino({
-      level: env.LOG_LEVEL || 'debug',
-      translateTime: 'HH:MM:ss Z',
-      // ignore: 'pid,hostname'
-    },
-      transport)
+      options: { colorize: true },
+    });
+    logger = pino(
+      {
+        level: env.LOG_LEVEL || 'debug',
+        translateTime: 'HH:MM:ss Z',
+        // ignore: 'pid,hostname'
+      },
+      transport,
+    );
   } else {
     logger = pino({
       level: env.LOG_LEVEL || 'info',
@@ -34,38 +48,38 @@ export const InitLogger = () => {
   }
 
   return logger;
-}
+};
 
 const logger = InitLogger();
-export { logger }
+export { logger };
 
 const CreateServerInstance = () => {
   const serverInstance = fastify({
     // Logger only for production
     logger: logger,
-    querystringParser: str => qs.parse(str)
+    querystringParser: str => qs.parse(str),
   });
 
   setupMiddlewares(serverInstance)
-  .then()
-  .catch(err => {
-    logger.error('Error when setting up middlewares!', err)
-  });
+    .then()
+    .catch(err => {
+      logger.error('Error when setting up middlewares!', err);
+    });
 
   if (!isProduction) {
     serverInstance.addHook('preHandler', function (req, reply, done) {
       if (req.body) {
-        req.log.info({ body: req.body }, 'parsed req body')
+        req.log.info({ body: req.body }, 'parsed req body');
       }
-      done()
-    })
+      done();
+    });
   }
 
   return serverInstance;
-}
+};
 
 export class FastifyHttpRequest implements IHttpRequest {
-  req: FastifyRequest
+  req: FastifyRequest;
   id?: string | undefined;
   url?: string | undefined;
   origin?: string | undefined;
@@ -87,7 +101,7 @@ export class FastifyHttpRequest implements IHttpRequest {
   isProduction: boolean;
 
   constructor(_req: FastifyRequest) {
-    this.req = _req
+    this.req = _req;
     this.id = this.req.id;
     this.method = this.req.method;
     this.params = this.req.params || {};
@@ -110,21 +124,19 @@ export class FastifyHttpRequest implements IHttpRequest {
    * @returns
    */
   get(field: string): string | undefined {
-    const h = this.req.raw.headers[field]
+    const h = this.req.raw.headers[field];
     if (h === undefined) {
-      return undefined
+      return undefined;
     }
     if (Array.isArray(h)) {
-      return h.toString()
+      return h.toString();
     }
 
     return h;
   }
-
 }
-
 export class FastifyHttpResponse implements IHttpResponse {
-  status?: number | undefined;
+  _status?: number = 200;
   message?: string | undefined;
   body?: unknown;
   length?: number | undefined;
@@ -134,44 +146,54 @@ export class FastifyHttpResponse implements IHttpResponse {
   res: FastifyReply;
 
   constructor(_res: FastifyReply) {
-    this.status = 200;
     this.type = 'application/json';
     this.res = _res;
   }
 
+  set status(val: number) {
+    this._status = val
+    this.res?.status(val)
+  }
+
+  notFound(message?: string, arg?: any): IHttpResponse {
+    this.res.callNotFound()
+    return this
+  }
+
   send(payload?: any) {
+    this.res.status(this._status)
     this.res.send(payload);
   }
 
-  set(field: { [key: string]: string | string[]; }): IHttpResponse;
+  set(field: { [key: string]: string | string[] }): IHttpResponse;
   set(field: string, val: string | string[]): IHttpResponse;
   set(field: any, val?: any): IHttpResponse {
-    this.res.header(field, val)
+    this.res.header(field, val);
     return this;
   }
-  header(field: { [key: string]: string | string[]; }): IHttpResponse;
+  header(field: { [key: string]: string | string[] }): IHttpResponse;
   header(field: string, val: string | string[]): IHttpResponse;
   header(field: any, val?: any): IHttpResponse {
-    this.res.header(field, val)
+    this.res.header(field, val);
     return this;
   }
 
   debugRequest(request: FastifyRequest) {
-    const debug = logger.debug
+    const debug = logger.debug;
     debug(JSON.stringify(request.body));
     debug(JSON.stringify(request.query));
     debug(JSON.stringify(request.params));
     debug(JSON.stringify(request.headers));
-    debug(request.raw)
-    debug(request.server)
-    debug(request.id)
-    debug(request.ip)
-    debug(request.ips)
-    debug(request.hostname)
-    debug(request.protocol)
-    debug(request.url)
-    debug(request.routerMethod)
-    debug(request.routerPath)
+    debug(request.raw);
+    debug(request.server);
+    debug(request.id);
+    debug(request.ip);
+    debug(request.ips);
+    debug(request.hostname);
+    debug(request.protocol);
+    debug(request.url);
+    debug(request.routerMethod);
+    debug(request.routerPath);
   }
 }
 
@@ -183,21 +205,19 @@ export class FastifyHttpServer implements IHttpServer {
   routes: HttpRoute[] = [];
 
   constructor(serverInstance?: any) {
-    this.server = serverInstance || CreateServerInstance()
+    this.server = serverInstance || CreateServerInstance();
   }
 
   listen(port: any): void {
-    this.server.listen(port)
+    this.server.listen(port);
   }
 
   getInstance() {
-      return this.server;
+    return this.server;
   }
 
   get(path: string, handler: HttpHandlerFn): IHttpServer {
-    this.server.get(path,
-      FastifyHandlerWrapper(handler)
-    )
+    this.server.get(path, FastifyHandlerWrapper(handler));
     return this;
   }
 
@@ -227,7 +247,7 @@ export class FastifyHttpServer implements IHttpServer {
 
   registerRoutes(routes: HttpRoute[], opts: HttpPluginOptions): void {
     // this.server.register(DoRegisterRoutes(this.server, routes, opts))
-    this.server.register(RegisterApiController(routes), opts)
+    this.server.register(RegisterApiController(routes), opts);
   }
 
   getServerInstance(): any {
@@ -237,13 +257,15 @@ export class FastifyHttpServer implements IHttpServer {
   setServerInstance(server: any) {
     this.server = server;
   }
-
 }
 
 function FastifyHandlerWrapper(handler: HttpHandlerFn) {
   return async function FastifyHandler(req: FastifyRequest, res: FastifyReply) {
-    return await handler(new FastifyHttpRequest(req), new FastifyHttpResponse(res))
-  }
+    return await handler(
+      new FastifyHttpRequest(req),
+      new FastifyHttpResponse(res),
+    );
+  };
 }
 
 function RegisterApiController(routes: HttpRoute[]) {
@@ -252,29 +274,35 @@ function RegisterApiController(routes: HttpRoute[]) {
       if (r.method && r.handler) {
         switch (r.method) {
           case 'get':
-            logger.debug(`Registered GET:${r.path}`)
+            logger.debug(`Registered GET:${r.path}`);
             router.get(
               r.path,
               async function (req: FastifyRequest, res: FastifyReply) {
-                const handler: HttpHandlerFn = r.handler || HttpHandlerFnNull
-                const hResult = await handler(new FastifyHttpRequest(req), new FastifyHttpResponse(res))
+                const handler: HttpHandlerFn = r.handler || HttpHandlerFnNull;
+                const hResult = await handler(
+                  new FastifyHttpRequest(req),
+                  new FastifyHttpResponse(res),
+                );
                 if (!res.sent) {
                   return hResult;
                 }
-              }
+              },
             );
             break;
           case 'post':
-            logger.debug(`Registered  POST:${r.path}`)
+            logger.debug(`Registered  POST:${r.path}`);
             router.post(
               r.path,
               async function (req: FastifyRequest, res: FastifyReply) {
-                const handler: HttpHandlerFn = r.handler || HttpHandlerFnNull
-                const hResult = await handler(new FastifyHttpRequest(req), new FastifyHttpResponse(res))
+                const handler: HttpHandlerFn = r.handler || HttpHandlerFnNull;
+                const hResult = await handler(
+                  new FastifyHttpRequest(req),
+                  new FastifyHttpResponse(res),
+                );
                 if (!res.sent) {
                   return hResult;
                 }
-              }
+              },
             );
             break;
           case 'put':
@@ -286,13 +314,16 @@ function RegisterApiController(routes: HttpRoute[]) {
           case 'head':
             break;
         }
-
       }
     }
-  }
+  };
 }
 
-function DoRegisterRoutes(router: FastifyInstance, routes: HttpRoute[], opts: HttpPluginOptions) {
+function DoRegisterRoutes(
+  router: FastifyInstance,
+  routes: HttpRoute[],
+  opts: HttpPluginOptions,
+) {
   // fastify.register(userController, { prefix: '/api/v1/user' });
 
   // async function userController(router: FastifyInstance) {
@@ -318,14 +349,13 @@ function DoRegisterRoutes(router: FastifyInstance, routes: HttpRoute[], opts: Ht
     /**
      * opts: { prefix: '/api/v1/user' }
      */
-    router.register(RegisterApiController(routes), opts)
-
-  }
+    router.register(RegisterApiController(routes), opts);
+  };
 }
 
 export class FastityServerFactory implements IHttpServerFactory {
   createServer(framework?: string, args?: any): IHttpServer {
-    const app = new FastifyHttpServer(args)
+    const app = new FastifyHttpServer(args);
     return app;
   }
 }

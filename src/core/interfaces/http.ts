@@ -5,7 +5,14 @@
 import { IncomingHttpHeaders } from 'http';
 // import { ParsedUrlQuery } from 'querystring';
 
-export type HTTPMethods = 'DELETE' | 'GET' | 'HEAD' | 'PATCH' | 'POST' | 'PUT' | 'OPTIONS'
+export type HTTPMethods =
+  | 'DELETE'
+  | 'GET'
+  | 'HEAD'
+  | 'PATCH'
+  | 'POST'
+  | 'PUT'
+  | 'OPTIONS';
 
 export type ErrorHandler<TRequest = any, TResponse = any> = (
   error: any,
@@ -24,11 +31,11 @@ export interface IHttpRequest {
   /**
    * id - the request ID
    */
-  id?: string
+  id?: string;
 
   /**
-       * Get/Set request URL.
-       */
+   * Get/Set request URL.
+   */
   url?: string;
 
   /**
@@ -69,7 +76,7 @@ export interface IHttpRequest {
   /**
    * body - the request payload, see Content-Type Parser for details on what request payloads Fastify natively parses and how to support other content types
    */
-  body?: any
+  body?: any;
 
   /**
    * Prints something like:
@@ -78,7 +85,7 @@ export interface IHttpRequest {
    *  host: '127.0.0.1:8000',
    *  accept: '*' }
    */
-  headers?: IncomingHttpHeaders
+  headers?: IncomingHttpHeaders;
 
   /**
    * Get/Set query string.
@@ -159,8 +166,8 @@ export interface IHttpRequest {
 
 export interface IHttpResponse {
   /**
-     * Get/Set response status code.
-     */
+   * Get/Set response status code.
+   */
   status?: number;
 
   /**
@@ -185,33 +192,33 @@ export interface IHttpResponse {
   headerSent?: boolean;
 
   /**
- * Return the response mime type void of
- * parameters such as "charset".
- *
- * Set Content-Type response header with `type` through `mime.lookup()`
- * when it does not contain a charset.
- *
- * Examples:
- *
- *     this.type = '.html';
- *     this.type = 'html';
- *     this.type = 'json';
- *     this.type = 'application/json';
- *     this.type = 'png';
- */
+   * Return the response mime type void of
+   * parameters such as "charset".
+   *
+   * Set Content-Type response header with `type` through `mime.lookup()`
+   * when it does not contain a charset.
+   *
+   * Examples:
+   *
+   *     this.type = '.html';
+   *     this.type = 'html';
+   *     this.type = 'json';
+   *     this.type = 'application/json';
+   *     this.type = 'png';
+   */
   type?: string;
 
   /**
-     * Get/Set the ETag of a response.
-     * This will normalize the quotes if necessary.
-     *
-     *     this.response.etag = 'md5hashsum';
-     *     this.response.etag = '"md5hashsum"';
-     *     this.response.etag = 'W/"123456789"';
-     *
-     * @param {String} etag
-     * @api public
-     */
+   * Get/Set the ETag of a response.
+   * This will normalize the quotes if necessary.
+   *
+   *     this.response.etag = 'md5hashsum';
+   *     this.response.etag = '"md5hashsum"';
+   *     this.response.etag = 'W/"123456789"';
+   *
+   * @param {String} etag
+   * @api public
+   */
   etag?: string;
 
   /**
@@ -228,31 +235,38 @@ export interface IHttpResponse {
   set(field: string, val: string | string[]): IHttpResponse;
   header(field: { [key: string]: string | string[] }): IHttpResponse;
   header(field: string, val: string | string[]): IHttpResponse;
-
+  /* Send a not found reply */
+  notFound(message?: string, arg?: any): IHttpResponse
   send(payload?: any): any;
 }
 
 export interface IHttpContext {
-  req: IHttpRequest
-  res: IHttpRequest,
+  req: IHttpRequest;
+  res: IHttpRequest;
   send(field: any): void;
 }
 
-export type HttpHandlerFn = (req: IHttpRequest, res: IHttpResponse) => Promise<any>
+export type HttpHandlerFn = (
+  req: IHttpRequest,
+  res: IHttpResponse,
+) => Promise<any>;
 
-export async function HttpHandlerFnNull(req: IHttpRequest, res: IHttpResponse): Promise<any> {
-  return Promise.resolve(true)
+export async function HttpHandlerFnNull(
+  req: IHttpRequest,
+  res: IHttpResponse,
+): Promise<any> {
+  return Promise.resolve(true);
 }
 
 export interface RegisterRouteOption {
-  prefix?: string
+  prefix?: string;
 }
 
-export type HttpPluginOptions = Record<string, any>
+export type HttpPluginOptions = Record<string, any>;
 
 export interface IHttpRoute {
-  method?: string
-  handle?: HttpHandlerFn
+  method?: string;
+  handle?: HttpHandlerFn;
 }
 
 export class HttpRoute implements IHttpRoute {
@@ -261,7 +275,12 @@ export class HttpRoute implements IHttpRoute {
   handler?: HttpHandlerFn;
   opts?: any;
 
-  constructor(method?: string, path?: string, handler?: HttpHandlerFn, opts?: any) {
+  constructor(
+    method?: string,
+    path?: string,
+    handler?: HttpHandlerFn,
+    opts?: any,
+  ) {
     this.method = method || 'all';
     this.path = path || '/';
     this.handler = handler;
@@ -272,10 +291,10 @@ export class HttpRoute implements IHttpRoute {
 export interface HttpServerOptions {
   port?: number;
   host?: string;
-  exclusive?: boolean,
-  readableAll?: boolean,
-  writableAll?: boolean,
-  ipv6Only?: boolean
+  exclusive?: boolean;
+  readableAll?: boolean;
+  writableAll?: boolean;
+  ipv6Only?: boolean;
 }
 
 export interface IHttpServer {
@@ -283,18 +302,18 @@ export interface IHttpServer {
    * fastify instance
    */
   server: any;
-  get(path: string, handler: HttpHandlerFn): IHttpServer
-  post(path: string, handler: HttpHandlerFn): IHttpServer
-  put(path: string, handler: HttpHandlerFn): IHttpServer
-  delete(path: string, handler: HttpHandlerFn): IHttpServer
-  head(path: string, handler: HttpHandlerFn): IHttpServer
-  option(path: string, handler: HttpHandlerFn): IHttpServer
-  registerRoute(route: HttpRoute, opts: HttpPluginOptions): void
-  registerRoutes(routes: HttpRoute[], opts: HttpPluginOptions): void
-  listen<T extends HttpServerOptions>(opts: T): void
+  get(path: string, handler: HttpHandlerFn): IHttpServer;
+  post(path: string, handler: HttpHandlerFn): IHttpServer;
+  put(path: string, handler: HttpHandlerFn): IHttpServer;
+  delete(path: string, handler: HttpHandlerFn): IHttpServer;
+  head(path: string, handler: HttpHandlerFn): IHttpServer;
+  option(path: string, handler: HttpHandlerFn): IHttpServer;
+  registerRoute(route: HttpRoute, opts: HttpPluginOptions): void;
+  registerRoutes(routes: HttpRoute[], opts: HttpPluginOptions): void;
+  listen<T extends HttpServerOptions>(opts: T): void;
   getInstance(): any;
 }
 
 export interface IHttpServerFactory {
-  createServer(opts?: any): IHttpServer
+  createServer(opts?: any): IHttpServer;
 }

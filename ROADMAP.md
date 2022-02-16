@@ -2,11 +2,9 @@
 
 ## V0.5
 
-* [] RBAC / policy
+* [] RBAC / policy -> Sang IS6 integration
 
 ## V0.4
-
-* DB migration
 
 ## V0.3
 
@@ -24,13 +22,15 @@
 * [] i18n
 * [X] logger (k8s compatible) (pino)
 * [] Dockerization
+* [] Fastity basic middlewares as error handling, cors, params encoding/decoding,...
 
 ## V0.1
 
 * [X] Fastify integration
-* [] Fastity basic middlewares
 * [X] API sample
+* [] Sample db CRUD
 * [X] OpenAPI 3.0 documentation
-* [] DB Integration with Knex / objection
+* [X] DB Integration with Knex / objection
 * [X] Localhost development env
 * [] DB unit test with FB jest
+* [X] DB migration

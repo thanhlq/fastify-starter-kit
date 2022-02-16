@@ -1,16 +1,20 @@
 import * as dotenv from 'dotenv';
 import { FastifyInstance } from 'fastify';
 import { HttpServerFactory } from './core';
-import RegisterRoute from './route-config';
+import DatabaseManager from './database/database';
+import RegisterRoute from './api/route-config';
 
 dotenv.config();
 
-console.log('App starting with env: ' + process.env.NODE_ENV)
+console.log('App starting with env: ' + process.env.NODE_ENV);
 
 const init = async () => {
+  /* Init DB */
+  DatabaseManager.init();
 
-  const app = await HttpServerFactory.CreateServerInstance()
-  RegisterRoute(app)
+  const app = await HttpServerFactory.CreateServerInstance();
+  RegisterRoute(app);
+
   //enable swagger docs
   if ('development' === process.env.NODE_ENV) {
     const server = app.server as FastifyInstance;
@@ -20,19 +24,16 @@ const init = async () => {
         // https://github.com/fastify/fastify-swagger
         // fastify.swagger()
       }
-    })
+    });
   }
 
   const FASTIFY_PORT = Number(process.env.FASTIFY_PORT) || 3006;
 
-  app.listen({port: FASTIFY_PORT});
+  app.listen({ port: FASTIFY_PORT });
 
   console.log(`🚀  Fastify server running on port ${FASTIFY_PORT}`);
   console.log(`Route index: /`);
   console.log(`Route user: /api/v1/user`);
-}
+};
 
-init().then()
-
-
-
+init().then();

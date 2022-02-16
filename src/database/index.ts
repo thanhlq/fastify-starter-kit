@@ -1,2 +1,2 @@
-import Knex from 'knex'
-import knexConfig from './knexfile'
+export * from './database';
+export * from './models';

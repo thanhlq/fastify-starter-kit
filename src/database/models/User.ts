@@ -1,20 +1,20 @@
-import { Model, Modifiers } from 'objection'
-import Organization from './Organization'
-import Group from './Group'
+import { Model, Modifiers } from 'objection';
+import Organization from './Organization';
+import Address from './Address';
+import Group from './Group';
 
-export default class Person extends Model {
-  id!: number
-  firstName!: string
-  lastName!: string
-  age!: number
+export default class User extends Model {
+  id?: number;
+  firstName?: string;
+  lastName?: string;
+  age?: number;
 
-  organization?: Organization[]
-  groups?: Group[]
-  children?: Person[]
-  parent?: Person
+  organization?: Organization;
+  organizations?: Organization[];
+  groups?: Group[];
 
   // Table name is the only required property.
-  static tableName = 'persons'
+  static tableName = 'users';
 
   // Optional JSON schema. This is not the database schema! Nothing is generated
   // based on this. This is only used for validation. Whenever a model instance
@@ -24,8 +24,8 @@ export default class Person extends Model {
     required: ['firstName', 'lastName'],
 
     properties: {
-      id: { type: 'integer' },
-      parentId: { type: ['integer', 'null'] },
+      id: { type: 'string', maxLength: 36 },
+      orgId: { type: 'string', minLength: 1, maxLength: 36 },
       firstName: { type: 'string', minLength: 1, maxLength: 255 },
       lastName: { type: 'string', minLength: 1, maxLength: 255 },
       age: { type: 'number' },
@@ -39,7 +39,7 @@ export default class Person extends Model {
         },
       },
     },
-  }
+  };
 
   // Modifiers are reusable query snippets that can be used in various places.
   static modifiers: Modifiers = {
@@ -50,60 +50,54 @@ export default class Person extends Model {
     searchByName(query, name) {
       // This `where` simply creates parentheses so that other `where`
       // statements don't get mixed with the these.
-      query.where((query) => {
+      query.where(query => {
         for (const namePart of name.trim().split(/\s+/)) {
           for (const column of ['firstName', 'lastName']) {
-            query.orWhereRaw('lower(??) like ?', [column, namePart.toLowerCase() + '%'])
+            query.orWhereRaw('lower(??) like ?', [
+              column,
+              namePart.toLowerCase() + '%',
+            ]);
           }
         }
-      })
+      });
     },
-  }
+  };
 
   // This object defines the relations to other models. The relationMappings
   // property can be a thunk to prevent circular dependencies.
   static relationMappings = () => ({
-    organizations: {
-      relation: Model.HasManyRelation,
+    organization: {
+      relation: Model.BelongsToOneRelation,
       // The related model. This can be either a Model subclass constructor or an
       // absolute file path to a module that exports one.
       modelClass: Organization,
       join: {
-        from: 'users.id',
-        to: 'animals.ownerId',
+        from: 'users.orgId',
+        to: 'organizations.id',
       },
     },
 
-    movies: {
+    groups: {
       relation: Model.ManyToManyRelation,
-      modelClass: Movie,
+      modelClass: Group,
       join: {
-        from: 'persons.id',
+        from: 'users.id',
         // ManyToMany relation needs the `through` object to describe the join table.
         through: {
-          from: 'persons_movies.personId',
-          to: 'persons_movies.movieId',
+          from: 'users_groups.userId',
+          to: 'users_groups.groupId',
         },
-        to: 'movies.id',
+        to: 'groups.id',
       },
     },
 
-    children: {
+    addresses: {
       relation: Model.HasManyRelation,
-      modelClass: Person,
+      modelClass: Address,
       join: {
-        from: 'persons.id',
-        to: 'persons.parentId',
+        from: 'users.id',
+        to: 'addresses.ownerId',
       },
     },
-
-    parent: {
-      relation: Model.BelongsToOneRelation,
-      modelClass: Person,
-      join: {
-        from: 'persons.parentId',
-        to: 'persons.id',
-      },
-    },
-  })
+  });
 }
