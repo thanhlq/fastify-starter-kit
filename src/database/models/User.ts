@@ -1,10 +1,10 @@
-import { Model, Modifiers } from 'objection';
-import Organization from './Organization';
+import { Model, Modifiers, QueryBuilderType } from 'objection';
 import Address from './Address';
+import BaseModel from './BaseModel';
 import Group from './Group';
+import Organization from './Organization';
 
-export default class User extends Model {
-  id?: number;
+export default class User extends BaseModel {
   firstName?: string;
   lastName?: string;
   age?: number;
@@ -100,4 +100,8 @@ export default class User extends Model {
       },
     },
   });
+
+  static forge<M extends Model>(): QueryBuilderType<User> {
+    return User.query()
+  }
 }

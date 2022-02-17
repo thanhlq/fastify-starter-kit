@@ -236,7 +236,12 @@ export interface IHttpResponse {
   header(field: { [key: string]: string | string[] }): IHttpResponse;
   header(field: string, val: string | string[]): IHttpResponse;
   /* Send a not found reply */
-  notFound(message?: string, arg?: any): IHttpResponse
+  notFound(message?: string): IHttpResponse
+  badRequest(message?: string): IHttpResponse
+  serverError(message?: string): IHttpResponse
+  notAuthorized(message?: string): IHttpResponse
+  permissionDenied(message?: string): IHttpResponse
+  resourceExisted(message?: string): IHttpResponse
   send(payload?: any): any;
 }
 

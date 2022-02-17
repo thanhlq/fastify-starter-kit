@@ -1,17 +1,15 @@
 import {
   IHttpRequest as HttpRequest,
-  IHttpResponse as HttpResponse,
+  IHttpResponse as HttpResponse
 } from '../../core/interfaces/http';
-import { logger } from '../../core/platform-fastify';
 import { nanoId } from '../../core/utils';
 import User from '../../database/models/User';
 
-export { ListUsers, GetUser, GetUserConfig, CreateUser };
+export { ListUsers, GetUser, GetUserConfig, CreateUser, PatchUser };
+
 
 async function CreateUser(req: HttpRequest, res: HttpResponse) {
   const payload = req.body
-
-  // todo: validate
 
   const createdUser = await User.query().insert({
     ...payload,
@@ -24,8 +22,6 @@ async function CreateUser(req: HttpRequest, res: HttpResponse) {
 async function GetUser(req: HttpRequest, res: HttpResponse) {
   const userId = req.params.userId
 
-  logger.debug('Get user by id: ' + userId)
-
   const user = await User.query().findById(userId);
 
   if (user) {
@@ -37,11 +33,16 @@ async function GetUser(req: HttpRequest, res: HttpResponse) {
 
 async function ListUsers(req: HttpRequest, res: HttpResponse) {
   const params = req.params
-
-  logger.debug('List users', params)
-
   const users = await User.query()
   res.send(users);
+}
+
+async function PatchUser(req: HttpRequest, res: HttpResponse) {
+  const partialPayload = req.body
+  const userId = req.params.userId
+
+  const dbResult = await User.forge().patch(partialPayload).findById(userId)
+  res.send(dbResult)
 }
 
 async function GetUserConfig(req: HttpRequest, res: HttpResponse) {

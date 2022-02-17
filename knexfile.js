@@ -14,7 +14,7 @@ module.exports = {
   development: {
     client: 'mysql',
     connection: {
-      host: '172.19.0.6',
+      host: '172.19.0.2',
       user: 'root',
       password: 'sa214',
       database: 'objection_test'

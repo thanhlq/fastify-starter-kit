@@ -20,6 +20,7 @@ import {
 import pino from 'pino';
 import * as constants from '../constants';
 import { setupMiddlewares } from './middlewares/middlewares';
+import * as httpErrors from 'http-errors'
 
 const env = process.env;
 export const environment = env.NODE_ENV;
@@ -136,7 +137,7 @@ export class FastifyHttpRequest implements IHttpRequest {
   }
 }
 export class FastifyHttpResponse implements IHttpResponse {
-  _status?: number = 200;
+  _status: number = 200;
   message?: string | undefined;
   body?: unknown;
   length?: number | undefined;
@@ -155,8 +156,33 @@ export class FastifyHttpResponse implements IHttpResponse {
     this.res?.status(val)
   }
 
-  notFound(message?: string, arg?: any): IHttpResponse {
-    this.res.callNotFound()
+  notFound(message?: string): IHttpResponse {
+    this.res.send(new httpErrors.NotFound(message))
+    return this
+  }
+
+  badRequest(message?: string): IHttpResponse {
+    this.res.send(new httpErrors.BadRequest(message))
+    return this
+  }
+
+  serverError(message?: string): IHttpResponse {
+    this.res.send(new httpErrors.InternalServerError(message))
+    return this
+  }
+
+  notAuthorized(message?: string): IHttpResponse {
+    this.res.send(new httpErrors.Unauthorized(message))
+    return this
+  }
+
+  permissionDenied(message?: string): IHttpResponse {
+    this.res.send(new httpErrors.Forbidden(message))
+    return this
+  }
+
+  resourceExisted(message?: string): IHttpResponse {
+    this.res.send(new httpErrors.Conflict(message))
     return this
   }
 
@@ -306,12 +332,84 @@ function RegisterApiController(routes: HttpRoute[]) {
             );
             break;
           case 'put':
+            logger.debug(`Registered  PUT:${r.path}`);
+            router.put(
+              r.path,
+              async function (req: FastifyRequest, res: FastifyReply) {
+                const handler: HttpHandlerFn = r.handler || HttpHandlerFnNull;
+                const hResult = await handler(
+                  new FastifyHttpRequest(req),
+                  new FastifyHttpResponse(res),
+                );
+                if (!res.sent) {
+                  return hResult;
+                }
+              },
+            );
+            break;
+          case 'patch':
+            logger.debug(`Registered  PATCH:${r.path}`);
+            router.patch(
+              r.path,
+              async function (req: FastifyRequest, res: FastifyReply) {
+                const handler: HttpHandlerFn = r.handler || HttpHandlerFnNull;
+                const hResult = await handler(
+                  new FastifyHttpRequest(req),
+                  new FastifyHttpResponse(res),
+                );
+                if (!res.sent) {
+                  return hResult;
+                }
+              },
+            );
             break;
           case 'delete':
+            logger.debug(`Registered  DELETE:${r.path}`);
+            router.delete(
+              r.path,
+              async function (req: FastifyRequest, res: FastifyReply) {
+                const handler: HttpHandlerFn = r.handler || HttpHandlerFnNull;
+                const hResult = await handler(
+                  new FastifyHttpRequest(req),
+                  new FastifyHttpResponse(res),
+                );
+                if (!res.sent) {
+                  return hResult;
+                }
+              },
+            );
             break;
           case 'options':
+            logger.debug(`Registered  OPTIONS:${r.path}`);
+            router.options(
+              r.path,
+              async function (req: FastifyRequest, res: FastifyReply) {
+                const handler: HttpHandlerFn = r.handler || HttpHandlerFnNull;
+                const hResult = await handler(
+                  new FastifyHttpRequest(req),
+                  new FastifyHttpResponse(res),
+                );
+                if (!res.sent) {
+                  return hResult;
+                }
+              },
+            );
             break;
           case 'head':
+            logger.debug(`Registered  HEAD:${r.path}`);
+            router.head(
+              r.path,
+              async function (req: FastifyRequest, res: FastifyReply) {
+                const handler: HttpHandlerFn = r.handler || HttpHandlerFnNull;
+                const hResult = await handler(
+                  new FastifyHttpRequest(req),
+                  new FastifyHttpResponse(res),
+                );
+                if (!res.sent) {
+                  return hResult;
+                }
+              },
+            );
             break;
         }
       }

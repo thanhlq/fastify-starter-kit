@@ -6,7 +6,7 @@ import {
   IHttpResponse,
   IHttpServer,
 } from '../core/interfaces/http';
-import { CreateUser, GetUser, GetUserConfig, ListUsers } from './controller/user-controller';
+import { CreateUser, GetUser, GetUserConfig, ListUsers, PatchUser } from './controller/user-controller';
 
 const { readFile } = promises;
 
@@ -24,6 +24,7 @@ const userRoutes = [
   new HttpRoute('get', '/', ListUsers),
   new HttpRoute('get', '/:userId', GetUser),
   new HttpRoute('post', '/', CreateUser),
+  new HttpRoute('patch', '/:userId', PatchUser),
   new HttpRoute('get', '/config', GetUserConfig),
 ];
 

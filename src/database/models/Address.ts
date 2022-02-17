@@ -3,7 +3,7 @@ import Organization from './Organization';
 import User from './User';
 
 export default class Address extends Model {
-  id!: number;
+  id!: string;
   line1!: string;
   line2?: string;
   state?: string;
@@ -27,9 +27,9 @@ export default class Address extends Model {
     required: ['line1'],
 
     properties: {
-      id: { type: 'integer' },
+      id: { type: 'string' },
       orgId: { type: 'string', minLength: 1, maxLength: 36 },
-      ownerId: { type: ['integer', 'null'] },
+      ownerId: { type: ['string', 'null'] },
       line1: { type: 'string', minLength: 1, maxLength: 255 },
       addressLine2: { type: 'string', maxLength: 255 },
       zipCode: { type: 'string', minLength: 3, maxLength: 10 },
