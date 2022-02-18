@@ -136,6 +136,7 @@ export class FastifyHttpRequest implements IHttpRequest {
     return h;
   }
 }
+
 export class FastifyHttpResponse implements IHttpResponse {
   _status: number = 200;
   message?: string | undefined;

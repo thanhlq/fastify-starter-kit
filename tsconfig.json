@@ -110,6 +110,7 @@
   },
   "includes": [
     "src/**/*",
+    "src/documents/**/*",
     ".env"
   ]
 }
