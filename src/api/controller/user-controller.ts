@@ -2,6 +2,7 @@ import {
   IHttpRequest as HttpRequest,
   IHttpResponse as HttpResponse
 } from '../../core/interfaces/http';
+import { logger } from '../../core/platform-fastify';
 import { nanoId } from '../../core/utils';
 import User from '../../database/models/User';
 
@@ -13,7 +14,6 @@ async function CreateUser(req: HttpRequest, res: HttpResponse) {
 
   const createdUser = await User.query().insert({
     ...payload,
-    id: nanoId(),
   })
 
   res.send(createdUser)
@@ -41,8 +41,19 @@ async function PatchUser(req: HttpRequest, res: HttpResponse) {
   const partialPayload = req.body
   const userId = req.params.userId
 
-  const dbResult = await User.forge().patch(partialPayload).findById(userId)
-  res.send(dbResult)
+  try {
+    const dbResult = await User.forge().patch({
+      ...partialPayload,
+      // Not working (prefered) new Date().toISOString()
+      updated_at: new Date()
+    }).findById(userId)
+
+    res.send(dbResult)
+  } catch (e) {
+    logger.error('Error happened when updating user')
+    logger.error(e)
+    res.badRequest()
+  }
 }
 
 async function GetUserConfig(req: HttpRequest, res: HttpResponse) {

@@ -2,9 +2,13 @@
 
 ##  FEATURES
 
-* Fastify as core
+* Fastify as core (Can be customized / replaced by expressjs,...)
 * Typescript
+* DB schema migration (by versions)
 * Sql builder with objection / knex
+* Common security
+* OpenAPI 3.0
+
 
 ## Installation
 

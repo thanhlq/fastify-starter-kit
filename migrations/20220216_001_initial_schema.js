@@ -1,9 +1,21 @@
+import { nanoId } from '../src/core/utils';
+
+function defineRequiredColumns(knex, table) {
+  table.string('id', 21).defaultTo(nanoId()).primary()
+  table.timestamp('created_at').defaultTo(knex.fn.now()).index()
+  table.timestamp('updated_at').index()
+  table.timestamp('deleted_at').index()
+  table.string('created_by', 21).index()
+  table.string('updated_by', 21).index()
+  table.string('deleted_by', 21).index()
+}
+
 // @ts-ignore
 exports.up = (knex) => {
   return knex.schema
     // @ts-ignore
     .createTable('organizations', (table) => {
-      table.string('id', 21).primary()
+      defineRequiredColumns(knex, table)
       table
       .string('parentId', )
       .references('id')
@@ -15,7 +27,7 @@ exports.up = (knex) => {
     })
     // @ts-ignore
     .createTable('users', (table) => {
-      table.string('id', 21).primary()
+      defineRequiredColumns(knex, table)
       table
         .string('orgId')
         .references('id')
@@ -28,14 +40,14 @@ exports.up = (knex) => {
       table.string('password')
       table.string('otpCode')
       table.integer('age')
-      table.string('activatedAt')
-      table.string('lastLoginAt')
-      table.string('deletedAt')
+      table.json('profile')
       table.json('address')
+      table.string('activated_at')
+      table.string('last_login_at')
     })
     // @ts-ignore
     .createTable('groups', (table) => {
-      table.string('id', 21).primary()
+      defineRequiredColumns(knex, table)
       table.string('name')
       table.string('code')
       table
@@ -48,7 +60,7 @@ exports.up = (knex) => {
 
     // @ts-ignore
     .createTable('users_groups', (table) => {
-      table.string('id', 21).primary()
+      defineRequiredColumns(knex, table)
 
       table
         .string('userId')

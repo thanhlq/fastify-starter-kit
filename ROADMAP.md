@@ -45,14 +45,15 @@
 * [ ] Dockerization
 * [ ] Fastity basic middlewares as error handling, cors, params encoding/decoding,...
 * [ ] DB unit test with jest
+* [ ] Rest API unit test
 * [ ] Static file serving
 
 ## V0.1
 
+* [x] Core definitions (for easier later platform-replacement)
 * [X] Fastify integration
 * [X] logger (k8s compatible) (pino)
 * [X] Environment setup
-* [x] Core definitions (for easier later platform-replacement)
 * [X] DB Integration with Knex / objection
 * [X] Sample db CRUD
 * [X] OpenAPI 3.0 documentation

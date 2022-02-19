@@ -301,7 +301,6 @@ function RegisterApiController(routes: HttpRoute[]) {
       if (r.method && r.handler) {
         switch (r.method) {
           case 'get':
-            logger.debug(`Registered GET:${r.path}`);
             router.get(
               r.path,
               async function (req: FastifyRequest, res: FastifyReply) {
@@ -317,7 +316,6 @@ function RegisterApiController(routes: HttpRoute[]) {
             );
             break;
           case 'post':
-            logger.debug(`Registered  POST:${r.path}`);
             router.post(
               r.path,
               async function (req: FastifyRequest, res: FastifyReply) {
@@ -333,7 +331,6 @@ function RegisterApiController(routes: HttpRoute[]) {
             );
             break;
           case 'put':
-            logger.debug(`Registered  PUT:${r.path}`);
             router.put(
               r.path,
               async function (req: FastifyRequest, res: FastifyReply) {
@@ -349,7 +346,6 @@ function RegisterApiController(routes: HttpRoute[]) {
             );
             break;
           case 'patch':
-            logger.debug(`Registered  PATCH:${r.path}`);
             router.patch(
               r.path,
               async function (req: FastifyRequest, res: FastifyReply) {
@@ -365,7 +361,6 @@ function RegisterApiController(routes: HttpRoute[]) {
             );
             break;
           case 'delete':
-            logger.debug(`Registered  DELETE:${r.path}`);
             router.delete(
               r.path,
               async function (req: FastifyRequest, res: FastifyReply) {
@@ -381,7 +376,6 @@ function RegisterApiController(routes: HttpRoute[]) {
             );
             break;
           case 'options':
-            logger.debug(`Registered  OPTIONS:${r.path}`);
             router.options(
               r.path,
               async function (req: FastifyRequest, res: FastifyReply) {
@@ -397,7 +391,6 @@ function RegisterApiController(routes: HttpRoute[]) {
             );
             break;
           case 'head':
-            logger.debug(`Registered  HEAD:${r.path}`);
             router.head(
               r.path,
               async function (req: FastifyRequest, res: FastifyReply) {
