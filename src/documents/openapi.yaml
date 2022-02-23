@@ -1,14 +1,14 @@
 openapi: 3.0.3
 info:
-  "description": default service.
-  "version": 1.0.0
-  "title": API SYSTEM SERVICES
+  title: API SYSTEM SERVICES
+  description: "TBD"
+  version: 1.0.0
 servers:
-  - url: http://localhost
+  - url: http://localhost:3003
     description: Staging server
 paths:
   #For User paths:
-  /users:
+  /api/v1/users:
     $ref: ./v1/user/user.yaml
 
 components:

@@ -11,9 +11,6 @@ async function setupMiddlewares(fastify: FastifyInstance) {
   if (enableSwaggerDocs) {
     const mSwagger = await (await import('./fastify-swagger')).default;
     mSwagger(fastify);
-    console.log('enabled swagger');
-  } else {
-    console.log('NOT enabled swagger');
   }
 }
 

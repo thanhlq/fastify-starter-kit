@@ -13,6 +13,7 @@ post:
   responses:
     "200":
       $ref: "../../components.yaml#/components/responses/handleHeaderAccept"
+
 get:
   security:
     - bearerAuth: []
@@ -22,9 +23,9 @@ get:
   operationId: getUserByIds
   parameters:
     - in: query
-      name: ids
-      required: true
-      description: 25,50,100
+      name: id
+      # required: true
+      description: '123'
       schema:
         type: string
   responses:

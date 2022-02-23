@@ -52,4 +52,4 @@ cd src/documents
 ./generate-openapi.json.sh
 ```
 
-go to http://localhost:3006/api-docs/
+go to http://localhost:3003/documentation/

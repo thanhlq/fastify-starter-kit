@@ -1,4 +1,44 @@
 /**
  * Currently, reuse 'pino' from fastify (if platform-fastity is not used, pino must be added as dependency)
  */
-export class LoggerFactory {}
+
+import { pino } from "pino";
+import * as constants from '../constants';
+
+const env = process.env;
+export const environment = env.NODE_ENV;
+export const isProduction = environment == constants.PRODUCTION_ENV;
+
+export const InitLogger = () => {
+  let logger;
+
+  if (!isProduction) {
+    const transport = pino.transport({
+      target: 'pino-pretty',
+      options: { colorize: true },
+    });
+    logger = pino(
+      {
+        level: env.LOG_LEVEL || 'debug',
+        translateTime: 'HH:MM:ss Z',
+        // ignore: 'pid,hostname'
+      },
+      transport,
+    );
+  } else {
+    logger = pino({
+      level: env.LOG_LEVEL || 'info',
+    });
+  }
+
+  return logger;
+};
+
+const logger = InitLogger();
+export { logger };
+
+export class LoggerFactory {
+  public static createLogger() {
+    return logger
+  }
+}

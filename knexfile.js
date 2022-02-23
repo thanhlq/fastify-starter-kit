@@ -1,5 +1,7 @@
 // Update with your config settings.
 
+const config = process.env
+
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
@@ -14,7 +16,7 @@ module.exports = {
   development: {
     client: 'mysql',
     connection: {
-      host: '172.19.0.2',
+      host: config.DB_HOST,
       user: 'root',
       password: 'sa214',
       database: 'objection_test'

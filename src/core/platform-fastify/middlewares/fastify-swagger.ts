@@ -3,71 +3,32 @@
 
 import { FastifyInstance } from 'fastify';
 import { fastifySwagger } from 'fastify-swagger';
+import { logger } from '../../logger';
+import * as path from 'path'
 
 const config = process.env;
-const { HOST = 'localhost', PORT = 3006 } = config;
+const docPath = path.join(global.appRoot, 'documents/openapi-full.yaml')
+const docBaseDir = path.join(global.appRoot, 'documents')
+logger.debug('Document path: ' + docPath)
+logger.debug('Document base dir: ' + docBaseDir)
 
-// openapi 3.0.3 options
-// https://github.com/fastify/fastify-swagger/blob/master/examples/dynamic-openapi.js
 const FastifySwagger = (fastify: FastifyInstance) => {
   /* static swagger file */
   fastify.register(fastifySwagger, {
     mode: 'static',
+    routePrefix: '/documentation',
     specification: {
-      path: '../ /examples/example-static-specification.yaml',
+      path: docPath,
       postProcessor: function (swaggerObject) {
         return swaggerObject
       },
-      baseDir: '/path/to/external/spec/files/location',
+      baseDir: docBaseDir
     },
+    exposeRoute: true,
   })
 
-  // fastify.register(fastifySwagger, {
-  //   routePrefix: '/api-docs',
-  //   openapi: {
-  //     info: {
-  //       title: 'Test swagger',
-  //       description: 'testing the fastify swagger api',
-  //       version: '0.1.0',
-  //     },
-  //     servers: [
-  //       { url: 'http://localhost:3006' },
-  //       { url: PORT == '80' ? HOST : `${HOST}:${PORT}` },
-  //     ],
-  //     components: {
-  //       securitySchemes: {
-  //         apiKey: {
-  //           type: 'apiKey',
-  //           name: 'apiKey',
-  //           in: 'header',
-  //         },
-  //       },
-  //     },
-  //   },
-  //   uiConfig: {
-  //     docExpansion: 'full',
-  //     deepLinking: false,
-  //   },
-  //   uiHooks: {
-  //     onRequest: function (request, reply, next) {
-  //       next();
-  //     },
-  //     preHandler: function (request, reply, next) {
-  //       next();
-  //     },
-  //   },
-  //   staticCSP: true,
-  //   hideUntagged: true,
-  //   exposeRoute: true,
-  // });
+  logger.info('Openapi documents registered!')
 
-  fastify.ready(err => {
-    if (err) {
-      throw err;
-    } else {
-      // console.log(JSON.stringify(fastify.swagger()))
-    }
-  });
 };
 
 export default FastifySwagger;

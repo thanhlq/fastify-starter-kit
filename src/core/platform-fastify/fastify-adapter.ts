@@ -23,8 +23,7 @@ import { setupMiddlewares } from './middlewares/middlewares';
 import * as httpErrors from 'http-errors'
 
 const env = process.env;
-export const environment = env.NODE_ENV;
-export const isProduction = environment == constants.PRODUCTION_ENV;
+export const isProduction: boolean = env.NODE_ENV == constants.PRODUCTION_ENV;
 
 export const InitLogger = () => {
   let logger;
@@ -115,7 +114,7 @@ export class FastifyHttpRequest implements IHttpRequest {
     this.ip = this.req.ip;
     // this.log = this.req.log;
 
-    this.isProduction = environment == 'production';
+    this.isProduction = isProduction;
   }
 
   /**

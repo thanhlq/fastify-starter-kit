@@ -16,6 +16,9 @@ export const DEVELOPMENT_ENV = 'development';
 export const STAGING_ENV = 'staging';
 export const TEST_ENV = 'production';
 
+const env = process.env;
+export const isProduction = env.NODE_ENV == PRODUCTION_ENV;
+
 export const MIDDLEWARE_SWAGGER_DOC_CK = 'SWAGGER_DOCS';
 export const MIDDLEWARE_SWAGGER_DOC_ON = 'ON';
 export const MIDDLEWARE_SWAGGER_DOC_OFF = 'OFF';

@@ -37,21 +37,21 @@
 
 ## V0.3
 
+* [ ] Rest API unit test
+* [ ] Static file serving
+* [ ] i18n
+* [ ] Dockerization
 * [ ] Inbound schema validator / based on openapi 3.x or json schema
 
 ## V0.2
 
-* [ ] i18n
-* [ ] Dockerization
-* [ ] Fastity basic middlewares as error handling, cors, params encoding/decoding,...
+* [ ] Fastity basic middlewares as error handling, params encoding/decoding,...
 * [ ] DB unit test with jest
-* [ ] Rest API unit test
-* [ ] Static file serving
 
 ## V0.1
 
-* [x] Core definitions (for easier later platform-replacement)
-* [X] Fastify integration
+* [x] Abstraction HTTP layer (core Node.js http) & Core definitions (for easier later platform-replacement)
+* [X] Fastify adapter as default
 * [X] logger (k8s compatible) (pino)
 * [X] Environment setup
 * [X] DB Integration with Knex / objection
