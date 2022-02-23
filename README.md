@@ -1,14 +1,15 @@
 # Fastify & Typescript App
 
-##  FEATURES
+## FEATURES
 
 * Fastify as core (Can be customized / replaced by expressjs,...)
 * Typescript
 * DB schema migration (by versions)
 * Sql builder with objection / knex
 * Common security
-* OpenAPI 3.0
-
+* OpenAPI 3.0 documentation in a modular way
+* DB unit test
+* Restful API testing
 
 ## Installation
 
