@@ -7,6 +7,9 @@ import fastify, {
 } from 'fastify';
 import { IncomingHttpHeaders } from 'http';
 import qs from 'qs';
+import pino from 'pino';
+import * as httpErrors from 'http-errors'
+
 import {
   HttpHandlerFn,
   HttpHandlerFnNull,
@@ -16,11 +19,10 @@ import {
   IHttpServerFactory,
   IHttpRequest,
   IHttpResponse,
-} from '../interfaces/http';
-import pino from 'pino';
-import * as constants from '../constants';
-import { setupMiddlewares } from './middlewares/middlewares';
-import * as httpErrors from 'http-errors'
+  HttpServerListener,
+} from '../interfaces/http.js';
+import * as constants from '../constants.js';
+import { setupMiddlewares } from './middlewares/middlewares.js';
 
 const env = process.env;
 export const isProduction: boolean = env.NODE_ENV == constants.PRODUCTION_ENV;
@@ -51,7 +53,6 @@ export const InitLogger = () => {
 };
 
 const logger = InitLogger();
-export { logger };
 
 const CreateServerInstance = () => {
   const serverInstance = fastify({
@@ -236,6 +237,15 @@ export class FastifyHttpServer implements IHttpServer {
 
   listen(port: any): void {
     this.server.listen(port);
+  }
+
+  /**
+   * Listen the server ready event.
+   */
+  ready(listener: HttpServerListener): void {
+    this.server.ready(err => {
+      listener(err)
+    })
   }
 
   getInstance() {

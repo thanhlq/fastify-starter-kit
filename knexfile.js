@@ -5,7 +5,7 @@ const config = process.env
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
-module.exports = {
+export default {
 
   // development: {
   //   client: 'sqlite3',
@@ -14,6 +14,17 @@ module.exports = {
   //   }
   // },
   development: {
+    client: 'mysql',
+    connection: {
+      host: config.DB_HOST,
+      user: 'root',
+      password: 'sa214',
+      database: 'objection_dev'
+    },
+    pool: { min: 0, max: 7 }
+  },
+
+  test: {
     client: 'mysql',
     connection: {
       host: config.DB_HOST,

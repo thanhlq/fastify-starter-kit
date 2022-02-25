@@ -1,8 +1,8 @@
 import { Model, Modifiers, QueryBuilderType } from 'objection';
-import Address from './Address';
-import BaseModel from './BaseModel';
-import Group from './Group';
-import Organization from './Organization';
+import Address from './Address.js';
+import BaseModel from './BaseModel.js';
+import Group from './Group.js';
+import Organization from './Organization.js';
 
 export default class User extends BaseModel {
   firstName?: string;

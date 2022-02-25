@@ -1,6 +1,7 @@
 import { Model } from 'objection';
-import Organization from './Organization';
-import User from './User';
+
+import Organization from './Organization.js';
+import User from './User.js';
 
 export default class Address extends Model {
   id!: string;

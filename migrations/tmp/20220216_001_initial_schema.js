@@ -1,9 +1,9 @@
-import { nanoId } from '../src/core/utils';
+import { nanoId } from '../../src/core/utils';
 
 function defineRequiredColumns(knex, table) {
   table.string('id', 21).defaultTo(nanoId()).primary()
   table.timestamp('created_at').defaultTo(knex.fn.now()).index()
-  table.timestamp('updated_at').index()
+  table.timestamp('updated_at').defaultTo(knex.fn.now()).index()
   table.timestamp('deleted_at').index()
   table.string('created_by', 21).index()
   table.string('updated_by', 21).index()
@@ -13,7 +13,6 @@ function defineRequiredColumns(knex, table) {
 // @ts-ignore
 exports.up = (knex) => {
   return knex.schema
-    // @ts-ignore
     .createTable('organizations', (table) => {
       defineRequiredColumns(knex, table)
       table
@@ -25,7 +24,6 @@ exports.up = (knex) => {
       table.string('name')
       table.string('code')
     })
-    // @ts-ignore
     .createTable('users', (table) => {
       defineRequiredColumns(knex, table)
       table
@@ -45,7 +43,6 @@ exports.up = (knex) => {
       table.string('activated_at')
       table.string('last_login_at')
     })
-    // @ts-ignore
     .createTable('groups', (table) => {
       defineRequiredColumns(knex, table)
       table.string('name')
@@ -57,18 +54,14 @@ exports.up = (knex) => {
         .onDelete('SET NULL')
         .index()
     })
-
-    // @ts-ignore
     .createTable('users_groups', (table) => {
       defineRequiredColumns(knex, table)
-
       table
         .string('userId')
         .references('id', 21)
         .inTable('users')
         .onDelete('CASCADE')
         .index()
-
       table
         .string('groupId')
         .references('id', 21)

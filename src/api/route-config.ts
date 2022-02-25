@@ -5,8 +5,8 @@ import {
   IHttpRequest,
   IHttpResponse,
   IHttpServer,
-} from '../core/interfaces/http';
-import { CreateUser, GetUser, GetUserConfig, ListUsers, PatchUser } from './controller/user-controller';
+} from '../core/interfaces/http.js';
+import { CreateUser, GetUser, GetUserConfig, ListUsers, PatchUser } from './controller/user-controller.js';
 
 const { readFile } = promises;
 

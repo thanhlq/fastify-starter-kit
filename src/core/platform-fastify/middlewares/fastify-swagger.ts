@@ -3,8 +3,9 @@
 
 import { FastifyInstance } from 'fastify';
 import { fastifySwagger } from 'fastify-swagger';
-import { logger } from '../../logger';
 import * as path from 'path'
+
+import { logger } from '../../logger/index.js';
 
 const config = process.env;
 const docPath = path.join(global.appRoot, 'documents/openapi-full.yaml')

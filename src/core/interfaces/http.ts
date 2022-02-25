@@ -256,6 +256,10 @@ export type HttpHandlerFn = (
   res: IHttpResponse,
 ) => Promise<any>;
 
+export type HttpServerListener = (
+  err: Error,
+) => void;
+
 export async function HttpHandlerFnNull(
   req: IHttpRequest,
   res: IHttpResponse,
@@ -316,6 +320,7 @@ export interface IHttpServer {
   registerRoute(route: HttpRoute, opts: HttpPluginOptions): void;
   registerRoutes(routes: HttpRoute[], opts: HttpPluginOptions): void;
   listen<T extends HttpServerOptions>(opts: T): void;
+  ready(listener: HttpServerListener): void;
   getInstance(): any;
 }
 

@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify';
-import * as constants from '../../constants';
+
+import * as constants from '../../constants.js';
 
 const config = process.env;
 

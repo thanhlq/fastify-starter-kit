@@ -1,2 +1,1 @@
-export * from './fastify-adapter';
-export * from './middlewares';
+export * from './fastify-adapter.js'

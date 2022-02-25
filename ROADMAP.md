@@ -37,7 +37,7 @@
 
 ## V0.3
 
-* [ ] Rest API unit test
+* [ ] Rest API unit test with [supertest](https://github.com/visionmedia/supertest)
 * [ ] Static file serving
 * [ ] i18n
 * [ ] Dockerization
@@ -46,7 +46,7 @@
 ## V0.2
 
 * [ ] Fastity basic middlewares as error handling, params encoding/decoding,...
-* [ ] DB unit test with jest
+* [ ] DB unit test with mocha/chai
 
 ## V0.1
 
