@@ -17,20 +17,20 @@ export default class Main {
 
   public static async start() {
     if (!this._started) {
+      this._started = true
+
       /* Init DB */
       DatabaseManager.init();
 
       /* Init Http Server */
-      const FASTIFY_PORT = Number(process.env.PORT) || 3003;
+      const FASTIFY_PORT = Number(process.env.PORT) || 3000;
       Main.app = await HttpServerFactory.CreateServerInstance();
       RegisterRoute(Main.app);
-
       if (constants.DEVELOPMENT_ENV === process.env.NODE_ENV || constants.STAGING_ENV === process.env.NODE_ENV) {
         const server = Main.app;
-
         server.ready(err => {
           if (!err) {
-            logger.info(`🚀  HTTP server running on port: ${FASTIFY_PORT}`)
+            logger.info('🚀  HTTP server READY!')
             Main._ready = true
           } else {
             logger.error('HTTP SERVER FAILED TO START, GOING TO EXIST!')
@@ -38,34 +38,44 @@ export default class Main {
             process.exit(0)
           }
         });
-
-        console.log('ENVIRONMENT: ' + process.env.NODE_ENV)
       }
-
-      Main.app.listen({ port: FASTIFY_PORT });
+      await Main.app.listen({ port: FASTIFY_PORT });
+      logger.info(`🚀  HTTP server running on port: ${FASTIFY_PORT}`)
+    } else {
+      logger.warn('Server is already starting...')
     }
+    return Main.app
   }
 
-  public static getHttpServer(): Promise<IHttpServer> {
-    if (Main._ready) {
+  public static getHttpServerReady(): Promise<IHttpServer> {
+    if (Main.app) {
       return Promise.resolve(Main.app)
     }
+
+    // ready not working???
     return new Promise((resolve, reject) => {
-      if (!Main._started) {
-        Main.start()
+      const listenServerReady = (app) => {
+        app.ready(
+          (err) => {
+            if (!err) {
+              resolve(Main.app)
+            } else {
+              reject(err)
+            }
+          })
       }
 
-      Main.app.ready((err) => {
-        if (!err) {
-          resolve(Main.app)
-        } else {
-          reject(err)
-        }
-      })
+      if (!Main._started) {
+        Main.start()
+          .then((app) => {
+            listenServerReady(app)
+          }).catch(reject)
+      } else {
+        listenServerReady(Main.app)
+      }
     })
-
   }
 
 }
 
-Main.start()
+// Main.start()

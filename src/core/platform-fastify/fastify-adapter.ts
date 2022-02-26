@@ -241,16 +241,25 @@ export class FastifyHttpServer implements IHttpServer {
   }
 
   /**
-   * Listen the server ready event.
+   * Listen the server ready event. No arguments it will return a Promise.
    */
-  ready(listener: HttpServerListener): void {
-    this.server.ready(err => {
-      listener(err)
-    })
+  ready(listener?: HttpServerListener) {
+    if (listener) {
+      this.server.ready(err => {
+        listener(err)
+      })
+    } else {
+      /* return promise */
+      return this.server.ready()
+    }
   }
 
   getInstance() {
     return this.server;
+  }
+
+  async close() {
+    return await this.server.close()
   }
 
   get(path: string, handler: HttpHandlerFn): IHttpServer {

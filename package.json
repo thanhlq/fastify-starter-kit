@@ -22,7 +22,8 @@
     "copyfiles": "copyfiles config.js src/**/*.yaml src/documents/**/*.yaml src/documents/v1/**/*.yaml dist && copyfiles -a *.env dist",
     "generate-api-docs": "openapi bundle src/documents/openapi.yaml --output dist/src/documents/openapi-full.yaml",
     "test": "yarn jest",
-    "jest": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest",
+    "jest": "NODE_OPTIONS=--experimental-vm-modules node ./node_modules/.bin/jest",
+    "jest-debug": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest",
     "mocha-ts": "TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'"
   },
   "author": "Thanh LE <thanhlq@gmail.com>",
@@ -93,6 +94,6 @@
     "typescript": "^4.5.5"
   },
   "engines": {
-    "node": ">=16.14.0"
+    "node": ">=14.19.0"
   }
 }

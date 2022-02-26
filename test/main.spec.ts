@@ -1,17 +1,27 @@
 import Main from '../src/main.js'
 
-test('the data is peanut butter', () => {
-  expect(1).toBe(1)
-});
+
+let app;
+
+describe('This is main test', () => {
+
+  beforeAll(async () => {
+    app = await Main.getHttpServerReady()
+  });
+
+  afterAll(async () => {
+    await app.close()
+  })
+
+  test('Test jest working', () => {
+    expect(1).toBe(1)
+  });
+
+  test('main', () => {
+    expect(app).not.toBeNull()
+    expect(app.server).not.toBeNull()
+  });
+
+})
 
 
-test('main', async () => {
-
-  // Normally, I don't advocate for console output during a test.
-  // However, this visually shows that the test is correctly loading an ESM module
-  // WARNING: The ora module requires a node version that supports the node:process syntax ( v16 or higher )
-
-  const app = await Main.getHttpServer()
-  expect(app).not.toBeNull()
-  expect(app.server).not.toBeNull()
-});

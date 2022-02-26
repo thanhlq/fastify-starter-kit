@@ -320,7 +320,8 @@ export interface IHttpServer {
   registerRoute(route: HttpRoute, opts: HttpPluginOptions): void;
   registerRoutes(routes: HttpRoute[], opts: HttpPluginOptions): void;
   listen<T extends HttpServerOptions>(opts: T): void;
-  ready(listener: HttpServerListener): void;
+  ready(listener: HttpServerListener);
+  close();
   getInstance(): any;
 }
 

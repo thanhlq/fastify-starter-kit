@@ -1,8 +1,12 @@
 import DatabaseManager from '../../src/database/database-manager'
 // import knex from
-import * as TestData from './db.json'
+import * as TestDB from './db.json'
 
-export default class DbHelper {
+console.log('json out 1')
+console.log(JSON.stringify(TestDB.users))
+console.log('json out 2')
+
+export class DbHelper {
   // 1. erase data
   static knex
 
@@ -25,4 +29,4 @@ export default class DbHelper {
   // 2. insert sample data
 }
 
-export {TestData}
+export {TestDB}
