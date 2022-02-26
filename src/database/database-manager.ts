@@ -1,6 +1,6 @@
 import Knex from 'knex';
 import { Model } from 'objection';
-import knexConfig from '../../knexfile.js';
+import knexConfig from '../../knexfile';
 
 export default class DatabaseManager {
   public static _knex: any;

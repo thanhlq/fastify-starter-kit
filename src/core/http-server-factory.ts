@@ -1,4 +1,4 @@
-import { IHttpServer, IHttpServerFactory } from './interfaces/http.js';
+import { IHttpServer, IHttpServerFactory } from './interfaces/http';
 
 /**
  * fastify | expressjs | ...
@@ -8,7 +8,7 @@ const httpCoreFramework = process.env.CORE_FRAMEWORK || 'fastify';
 export default class HttpServerFactory {
   static async CreateServerInstance(opts?: {}): Promise<IHttpServer> {
     try {
-      const frameworkImplImportPath = `./platform-${httpCoreFramework}/index.js`;
+      const frameworkImplImportPath = `./platform-${httpCoreFramework}/index`;
       const adapterImport = await import(frameworkImplImportPath);
       const appFactory: IHttpServerFactory = adapterImport.HttpServerFactory;
       const app: IHttpServer = appFactory.createServer(opts);

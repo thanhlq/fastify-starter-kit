@@ -1,1 +1,1 @@
-export * from './fastify-adapter.js'
+export * from './fastify-adapter'

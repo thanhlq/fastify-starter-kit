@@ -1,6 +1,6 @@
 import { Model } from 'objection';
-import Organization from './Organization.js';
-import User from './User.js';
+import Organization from './Organization';
+import User from './User';
 
 export default class Group extends Model {
   id!: string;

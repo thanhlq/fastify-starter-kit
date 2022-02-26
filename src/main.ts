@@ -1,10 +1,10 @@
 // import { appPath } from '../config'
-import HttpServerFactory from './core/http-server-factory.js';
-import DatabaseManager from './database/database-manager.js';
-import RegisterRoute from './api/route-config.js';
-import * as constants from './core/constants.js'
-import { logger } from './core/logger/index.js';
-import { IHttpServer } from './core/interfaces/http.js';
+import HttpServerFactory from './core/http-server-factory';
+import DatabaseManager from './database/database-manager';
+import RegisterRoute from './api/route-config';
+import * as constants from './core/constants'
+import { logger } from './core/logger/index';
+import { IHttpServer } from './core/interfaces/http';
 
 /**
  * Simple class with responsibility to start the http server.
@@ -31,6 +31,7 @@ export default class Main {
         server.ready(err => {
           if (!err) {
             logger.info(`🚀  HTTP server running on port: ${FASTIFY_PORT}`)
+            // logger.info('Root application path: ' + appPath)
             Main._ready = true
           } else {
             logger.error('HTTP SERVER FAILED TO START, GOING TO EXIST!')
@@ -51,17 +52,25 @@ export default class Main {
       return Promise.resolve(Main.app)
     }
     return new Promise((resolve, reject) => {
-      if (!Main._started) {
-        Main.start()
+      const listenServerReady = () => {
+        Main.app.ready(
+          (err) => {
+            if (!err) {
+              resolve(Main.app)
+            } else {
+              reject(err)
+            }
+          })
       }
 
-      Main.app.ready((err) => {
-        if (!err) {
-          resolve(Main.app)
-        } else {
-          reject(err)
-        }
-      })
+      if (!Main._started) {
+        Main.start()
+          .then(() => {
+            listenServerReady()
+          }).catch(reject)
+      } else {
+        listenServerReady()
+      }
     })
 
   }

@@ -5,13 +5,13 @@ import {
   IHttpRequest,
   IHttpResponse,
   IHttpServer,
-} from '../core/interfaces/http.js';
-import { CreateUser, GetUser, GetUserConfig, ListUsers, PatchUser } from './controller/user-controller.js';
+} from '../core/interfaces/http';
+import { CreateUser, GetUser, GetUserConfig, ListUsers, PatchUser } from './controller/user-controller';
 
 const { readFile } = promises;
 
 async function ServeFile(req: IHttpRequest, res: IHttpResponse) {
-  const indexHtmlPath = resolve(__dirname, '../static/index.html');
+  const indexHtmlPath = resolve(__dirname, '../public/index.html');
   const indexHtmlContent = await readFile(indexHtmlPath);
   res.header('Content-Type', 'text/html; charset=utf-8').send(indexHtmlContent);
 }

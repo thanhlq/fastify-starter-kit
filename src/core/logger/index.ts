@@ -3,7 +3,7 @@
  */
 
 import { pino } from "pino";
-import * as constants from '../constants.js';
+import * as constants from '../constants';
 
 const env = process.env;
 

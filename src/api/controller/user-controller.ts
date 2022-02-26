@@ -1,9 +1,9 @@
 import {
   IHttpRequest as HttpRequest,
   IHttpResponse as HttpResponse
-} from '../../core/interfaces/http.js';
-import { logger } from '../../core/logger/index.js';
-import User from '../../database/models/User.js';
+} from '../../core/interfaces/http';
+import { logger } from '../../core/logger/index';
+import User from '../../database/models/User';
 
 export { ListUsers, GetUser, GetUserConfig, CreateUser, PatchUser };
 

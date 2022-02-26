@@ -20,9 +20,9 @@ import {
   IHttpRequest,
   IHttpResponse,
   HttpServerListener,
-} from '../interfaces/http.js';
-import * as constants from '../constants.js';
-import { setupMiddlewares } from './middlewares/middlewares.js';
+} from '../interfaces/http';
+import * as constants from '../constants';
+import { setupMiddlewares } from './middlewares/middlewares';
 
 const env = process.env;
 export const isProduction: boolean = env.NODE_ENV == constants.PRODUCTION_ENV;
