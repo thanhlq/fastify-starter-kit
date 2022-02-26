@@ -22,3 +22,5 @@ const jestConfig = {
 }
 
 console.log(JSON.stringify(jestConfig))
+
+// 2107  node --loader ts-node/esm jest.config.sample.ts

@@ -23,9 +23,8 @@
     "generate-api-docs": "openapi bundle src/documents/openapi.yaml --output dist/src/documents/openapi-full.yaml",
     "test-ts": "NODE_ENV=test TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ./node_modules/.bin/mocha --check-leaks -r esm -r tsconfig-paths/register -r ts-node/register \"test/**/*.spec.ts\"",
     "test": "NODE_ENV=test mocha --check-leaks \"dist/test/**/*.spec.ts\"",
-    "jest": "./node_modules/.bin/jest",
-    "mocha-ts": "TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'",
-    "ts-node": ""
+    "jest": "NODE_OPTIONS=--experimental-vm-modules ./node_modules/.bin/jest",
+    "mocha-ts": "TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'"
   },
   "author": "Thanh LE <thanhlq@gmail.com>",
   "license": "MIT",

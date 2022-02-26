@@ -1,0 +1,20 @@
+{
+  "globals": {
+    "extensionsToTreatAsEsm": [
+      ".ts",
+      ".js"
+    ],
+    "ts-jest": {
+      "useESM": true
+    }
+  },
+  "moduleDirectories": ["node_modules", "src"],
+  "preset": "ts-jest/presets/js-with-ts-esm",
+  "transformIgnorePatterns": [],
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "dist",
+    "public",
+    "migrations"
+  ]
+}
