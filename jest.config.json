@@ -8,7 +8,13 @@
       "useESM": true
     }
   },
-  "moduleDirectories": ["node_modules", "src"],
+  "resolver": "jest-ts-webcompat-resolver",
+  "transform": {
+  },
+  "extensionsToTreatAsEsm": [
+    ".ts"
+  ],
+  "moduleDirectories": ["node_modules", "."],
   "preset": "ts-jest/presets/js-with-ts-esm",
   "transformIgnorePatterns": [],
   "testPathIgnorePatterns": [

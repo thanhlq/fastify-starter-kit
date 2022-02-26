@@ -1,5 +1,4 @@
-import exp from 'constants';
-import Main from '../src/main'
+import Main from '../src/main.js'
 
 test('the data is peanut butter', () => {
   expect(1).toBe(1)

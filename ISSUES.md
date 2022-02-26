@@ -11,7 +11,7 @@ Here is a workaround:
 "strictNullChecks": false  in tsconfig.json
 Downgrade ts to "typescript": < "4.5.3"
 
-## Mocha.js / Typescript
+## Mocha.js / Typescript / ESM
 
 Ref
 
@@ -19,3 +19,5 @@ Ref
 * [typescript with ts-node and ESM support #47](https://github.com/mochajs/mocha-examples/issues/47)
 
 * This test framework does not work with ESM & Typescript yet, have a look at: https://github.com/mochajs/mocha-examples/issues/47
+
+## Jest / Typescript / ESM

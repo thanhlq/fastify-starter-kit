@@ -67,3 +67,5 @@ export default class Main {
   }
 
 }
+
+Main.start()

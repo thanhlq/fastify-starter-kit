@@ -4,6 +4,7 @@
 
 * Fastify as core (Can be customized / replaced by expressjs,...)
 * Typescript
+* Typescript documentation with typedoc
 * DB schema migration (by versions)
 * Sql builder with objection / knex
 * Common security
@@ -54,3 +55,10 @@ cd src/documents
 ```
 
 go to http://localhost:3003/documentation/
+
+## APPENDIX
+
+### Important Notes
+
+* This application is based on ECMAScript Module supported by Node 12+
+* [By using ECMAScript modules (ESM), the file extensions are mandatory](https://nodejs.org/api/esm.html#esm_mandatory_file_extensions)
