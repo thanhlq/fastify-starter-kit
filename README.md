@@ -3,14 +3,14 @@
 ## FEATURES
 
 * Fastify as core (Can be customized / replaced by expressjs,...)
-* Typescript
+* Modern typescript / ESM
 * Typescript documentation with typedoc
 * DB schema migration (by versions)
-* Sql builder with objection / knex
-* Common security
+* Lightweigh ORM with objection / knex
+* Common securities (xss, rate limit, csrf, csp, header protection)
 * OpenAPI 3.0 documentation in a modular way
-* DB unit test
-* Restful API testing
+* DB unit test with Jest / Typescript / ESM
+* Restful API testing with supertest
 
 ## Installation
 
@@ -25,14 +25,19 @@ $ yarn install
 ### Development
 
 ```bash
-# Required: typescript watch compilation
-$ yarn watch
-
 # Required: development server with hot reload (nodemon)
 $ yarn dev
 
 # Format with prettier
 $ yarn format
+
+$ yarn lint
+```
+
+### Test
+
+```bash
+yarn test
 ```
 
 ### Production
