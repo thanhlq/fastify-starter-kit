@@ -18,7 +18,7 @@ export default class DatabaseManager {
 
       return DatabaseManager._knex;
     } else {
-      console.error('You must define the right NODE_ENV: test / development / production')
+      console.error('[CRITICAL] [EXIST] You must define the right NODE_ENV: test / development / production')
       process.exit(1)
     }
   }

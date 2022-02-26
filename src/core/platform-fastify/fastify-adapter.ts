@@ -138,7 +138,7 @@ export class FastifyHttpRequest implements IHttpRequest {
 }
 
 export class FastifyHttpResponse implements IHttpResponse {
-  _status: number = 200;
+  _status: number;
   message?: string | undefined;
   body?: unknown;
   length?: number | undefined;
@@ -150,6 +150,7 @@ export class FastifyHttpResponse implements IHttpResponse {
   constructor(_res: FastifyReply) {
     this.type = 'application/json';
     this.res = _res;
+    this._status = 200
   }
 
   set status(val: number) {

@@ -33,6 +33,9 @@ const init = async () => {
   }
 
   app.listen({ port: FASTIFY_PORT });
+  return app;
 };
 
 init().then();
+
+export default {StartApp: init}

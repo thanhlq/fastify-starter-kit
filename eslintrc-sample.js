@@ -1,14 +1,20 @@
-module.exports = {
+const a = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: 'tsconfig.json',
     sourceType: 'module',
+    ecmaVersion: 7,
+    "ecmaFeatures": {
+      // "jsx": true,
+      "ts": true,
+      "modules": true
+  }
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
+    'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier',
   ],
   root: true,
   env: {
@@ -23,3 +29,5 @@ module.exports = {
     '@typescript-eslint/ban-types': 'off',
   },
 };
+
+console.log(JSON.stringify(a))
