@@ -59,11 +59,4 @@ cd src/documents
 ./generate-openapi.json.sh
 ```
 
-go to http://localhost:3003/documentation/
-
-## APPENDIX
-
-### Important Notes
-
-* This application is based on ECMAScript Module supported by Node 12+
-* [By using ECMAScript modules (ESM), the file extensions are mandatory](https://nodejs.org/api/esm.html#esm_mandatory_file_extensions)
+go to http://localhost:3000/documentation/

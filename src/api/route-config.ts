@@ -15,10 +15,6 @@ async function ServeFile(req: IHttpRequest, res: IHttpResponse) {
   const indexHtmlContent = await readFile(indexHtmlPath);
   res.header('Content-Type', 'text/html; charset=utf-8').send(indexHtmlContent);
 }
-// export default async function router(fastify: FastifyInstance) {
-//   fastify.register(userController, { prefix: '/api/v1/user' });
-//   fastify.register(indexController, { prefix: '/' });
-// }
 
 const userRoutes = [
   new HttpRoute('get', '/', ListUsers),

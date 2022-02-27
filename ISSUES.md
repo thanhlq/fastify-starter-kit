@@ -16,8 +16,13 @@ Downgrade ts to "typescript": < "4.5.3"
 Ref
 
 * [Node 12 ESM](https://stackoverflow.com/questions/59787574/typescript-tsconfig-settings-for-node-js-12)
-* [typescript with ts-node and ESM support #47](https://github.com/mochajs/mocha-examples/issues/47)
+* [Typescript with ts-node and ESM support #47](https://github.com/mochajs/mocha-examples/issues/47)
 
-* This test framework does not work with ESM & Typescript yet, have a look at: https://github.com/mochajs/mocha-examples/issues/47
 
 ## Jest / Typescript / ESM
+
+
+## Important Notes
+
+* This application is based on ECMAScript Module supported by Node 12+
+* [By using ECMAScript modules (ESM), the file extensions are mandatory](https://nodejs.org/api/esm.html#esm_mandatory_file_extensions)

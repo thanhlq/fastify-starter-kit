@@ -1,4 +1,4 @@
-import Main from '../src/main.js'
+import MainServer from '../src/server.js'
 
 
 let app;
@@ -6,7 +6,7 @@ let app;
 describe('This is main test', () => {
 
   beforeAll(async () => {
-    app = await Main.getHttpServerReady()
+    app = await MainServer.start()
   });
 
   afterAll(async () => {
