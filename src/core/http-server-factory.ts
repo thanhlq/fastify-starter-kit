@@ -5,6 +5,9 @@ import { IHttpServer, IHttpServerFactory } from './interfaces/http.js';
  */
 const httpCoreFramework = process.env.CORE_FRAMEWORK || 'fastify';
 
+/**
+ * The factory class for easier building the HttpServer instance.
+ */
 export default class HttpServerFactory {
   static async CreateServerInstance(opts?: {}): Promise<IHttpServer> {
     try {

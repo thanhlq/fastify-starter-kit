@@ -7,7 +7,7 @@ import { getApplicationRootPath } from '../../utils/index.js';
 
 const config = process.env;
 
-const RegisterFastifySwagger = (fastify: FastifyInstance) => {
+const RegisterFastifySwagger = async (fastify: FastifyInstance) => {
   let wwwPublicPath;
   if (config.WWW_PUBLIC_PATH) {
     wwwPublicPath = config.WWW_PUBLIC_PATH;
@@ -17,7 +17,7 @@ const RegisterFastifySwagger = (fastify: FastifyInstance) => {
   }
 
   /* static swagger file */
-  fastify.register(fastifyStatic, {
+  await fastify.register(fastifyStatic, {
     root: wwwPublicPath,
     prefix: '/',
   });

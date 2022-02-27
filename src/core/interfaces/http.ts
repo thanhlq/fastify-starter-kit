@@ -5,6 +5,10 @@
 import { IncomingHttpHeaders } from 'http';
 // import { ParsedUrlQuery } from 'querystring';
 
+/**
+ * Supported HTTP methods.
+ * @type HTTPMethods
+ */
 export type HTTPMethods =
   | 'DELETE'
   | 'GET'

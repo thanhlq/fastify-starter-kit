@@ -8,14 +8,21 @@ import { IHttpServer } from './core/interfaces/http.js';
 
 /**
  * Simple class with responsibility to start the http server.
+ * @class ServerMain
  */
 export default class ServerMain {
   static app: IHttpServer;
   private static _ready: boolean;
-  private static _started;
+  private static _started = false;
 
+  /**
+   * Start to bootstrap the Http server.
+   *
+   * @returns Server instance
+   */
   public static async start() {
     if (!this._started) {
+      logger.debug('server.start() invoked')
       this._started = true;
 
       /* Init DB */

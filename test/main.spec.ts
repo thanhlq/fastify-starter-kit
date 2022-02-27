@@ -5,7 +5,9 @@ let app;
 describe('This is main test', () => {
 
   beforeAll(async () => {
+    console.log('before server started')
     app = await MainServer.start()
+    console.log('after server started')
   });
 
   afterAll(async () => {

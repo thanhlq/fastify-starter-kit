@@ -2,16 +2,17 @@
 
 ## 1. FEATURES
 
-* Fastify as core (Can be customized / replaced by expressjs,...)
-* Modern typescript / ESM
-* Typescript documentation with typedoc
-* DB schema migration (by versions)
-* Lightweigh ORM with objection / knex
-* Common securities (xss, rate limit, csrf, csp, header protection)
-* OpenAPI 3.0 documentation in a modular way
-* DB unit test with Jest / Typescript / ESM
-* Restful API testing with supertest
-* Node.js 14+
+* [X] Fastify as core (Can be customized / replaced by expressjs,...)
+* [X] Modern typescript / ESM
+* [X] Typescript documentation with typedoc
+* [X] DB schema migration (by versions)
+* [X] Lightweigh ORM with objection / knex
+* [ ] Common securities (xss, rate limit, csrf, csp, header protection)
+* [X] OpenAPI 3.0 documentation in a modular way
+* [X] DB unit test with Jest / Typescript / ESM
+* [ ] Restful API testing with supertest
+* [X] Static file serving.
+* [X] Node.js 14+
 
 ## 2. Installation
 
@@ -51,6 +52,9 @@ $ yarn format
 
 # Check code lint (eslint)
 $ yarn lint
+
+# Generate class documentation (typescript docs) (docs folder by default) : currently NOK with ESM
+$ yarn docs
 ```
 
 ### 3.2 Test

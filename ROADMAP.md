@@ -26,6 +26,7 @@
 * [ ] Auth -> Sang / IS6
 * [ ] Session
 * [ ] Pubsub / cache
+* [ ] Inbound schema validator / based on openapi 3.x or json schema
 
 ## V0.4
 
@@ -33,19 +34,28 @@
 * [ ] CSRF protection
 * [ ] Header protection / security practices / Helmet
 * [ ] Rate limit
+
+## V0.3.2
+
+* [ ] API performance test
+
+## V0.3.1
+
+* [ ] Cors setup / preflight request
+* [ ] Multipart
 * [ ] Conten security policy
+* [ ] Real work testing (deploying / hosting)
 
 ## V0.3
 
 * [ ] Rest API unit test with [supertest](https://github.com/visionmedia/supertest)
-* [ ] Static file serving
 * [ ] i18n
 * [ ] Dockerization
-* [ ] Inbound schema validator / based on openapi 3.x or json schema
 
 ## V0.2
 
-* [ ] Fastity basic middlewares as error handling, standard url params encoding/decoding,...
+* [X] Fastity basic middlewares as error handling, standard url params encoding/decoding,...
+* [X] Static file serving
 * [X] DB unit test with jest / typescript / ESM (Ecmascript module)
 * [X] Convert commonjs type to the ESM (es-module) (for future compatiblity, since es-module can import commonjs but commonjs cannot import es module)
 * [X] Static code analysis with latest Emascript version (2021)
@@ -61,3 +71,4 @@
 * [X] OpenAPI 3.0 documentation
 * [X] DB schema generation / migration
 * [X] Auto code format
+* [X] Typescript api documentation / generating
