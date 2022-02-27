@@ -11,10 +11,11 @@ export default class HttpServerFactory {
       const frameworkImplImportPath = `./platform-${httpCoreFramework}/index.js`;
       const adapterImport = await import(frameworkImplImportPath);
       const appFactory: IHttpServerFactory = adapterImport.HttpServerFactory;
-      const app: IHttpServer = appFactory.createServer(opts);
+      const app: IHttpServer = appFactory.createHttpServer(opts);
+      await app.run();
       return app;
     } catch (e) {
-      console.error('Error when creating server instance by factory!', e);
+      console.error(e, 'Error when creating server instance by factory!');
       throw e;
     }
   }

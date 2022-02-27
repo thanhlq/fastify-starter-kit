@@ -102,6 +102,6 @@ export default class User extends BaseModel {
   });
 
   static forge<M extends Model>(): QueryBuilderType<User> {
-    return User.query()
+    return User.query();
   }
 }

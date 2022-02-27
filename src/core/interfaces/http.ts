@@ -236,12 +236,12 @@ export interface IHttpResponse {
   header(field: { [key: string]: string | string[] }): IHttpResponse;
   header(field: string, val: string | string[]): IHttpResponse;
   /* Send a not found reply */
-  notFound(message?: string): IHttpResponse
-  badRequest(message?: string): IHttpResponse
-  serverError(message?: string): IHttpResponse
-  notAuthorized(message?: string): IHttpResponse
-  permissionDenied(message?: string): IHttpResponse
-  resourceExisted(message?: string): IHttpResponse
+  notFound(message?: string): IHttpResponse;
+  badRequest(message?: string): IHttpResponse;
+  serverError(message?: string): IHttpResponse;
+  notAuthorized(message?: string): IHttpResponse;
+  permissionDenied(message?: string): IHttpResponse;
+  resourceExisted(message?: string): IHttpResponse;
   send(payload?: any): any;
 }
 
@@ -256,9 +256,7 @@ export type HttpHandlerFn = (
   res: IHttpResponse,
 ) => Promise<any>;
 
-export type HttpServerListener = (
-  err: Error,
-) => void;
+export type HttpServerListener = (err: Error) => void;
 
 export async function HttpHandlerFnNull(
   req: IHttpRequest,
@@ -311,6 +309,19 @@ export interface IHttpServer {
    * fastify instance
    */
   server: any;
+  /**
+   * This is to start procedures as automatic middleware setups, consistency checks,...
+   */
+  run();
+  /**
+   * Start to accept the connections.
+   * @param opts
+   */
+  listen<T extends HttpServerOptions>(opts: T): void;
+  /**
+   * Shutdown the server.
+   */
+  close();
   get(path: string, handler: HttpHandlerFn): IHttpServer;
   post(path: string, handler: HttpHandlerFn): IHttpServer;
   put(path: string, handler: HttpHandlerFn): IHttpServer;
@@ -319,12 +330,10 @@ export interface IHttpServer {
   option(path: string, handler: HttpHandlerFn): IHttpServer;
   registerRoute(route: HttpRoute, opts: HttpPluginOptions): void;
   registerRoutes(routes: HttpRoute[], opts: HttpPluginOptions): void;
-  listen<T extends HttpServerOptions>(opts: T): void;
   ready(listener?: HttpServerListener);
-  close();
   getInstance(): any;
 }
 
 export interface IHttpServerFactory {
-  createServer(opts?: any): IHttpServer;
+  createHttpServer(opts?: any): IHttpServer;
 }

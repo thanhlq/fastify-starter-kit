@@ -1,7 +1,7 @@
-import { nanoId } from '../../src/core/utils';
+import { nanoid } from '../../src/core/utils';
 
 function defineRequiredColumns(knex, table) {
-  table.string('id', 21).defaultTo(nanoId()).primary()
+  table.string('id', 21).defaultTo(nanoid()).primary()
   table.timestamp('created_at').defaultTo(knex.fn.now()).index()
   table.timestamp('updated_at').defaultTo(knex.fn.now()).index()
   table.timestamp('deleted_at').index()

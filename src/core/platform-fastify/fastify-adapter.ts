@@ -8,7 +8,7 @@ import fastify, {
 import { IncomingHttpHeaders } from 'http';
 import qs from 'qs';
 import pino from 'pino';
-import * as httpErrors from 'http-errors'
+import * as httpErrors from 'http-errors';
 
 import {
   HttpHandlerFn,
@@ -21,11 +21,10 @@ import {
   IHttpResponse,
   HttpServerListener,
 } from '../interfaces/http.js';
-import * as constants from '../constants.js';
-import { setupMiddlewares } from './middlewares/middlewares.js';
+import { setupFastifyMiddlewares } from './middlewares/middlewares.js';
+import { isProduction } from '../constants.js';
 
 const env = process.env;
-export const isProduction: boolean = env.NODE_ENV == constants.PRODUCTION_ENV;
 
 export const InitLogger = () => {
   let logger;
@@ -54,29 +53,12 @@ export const InitLogger = () => {
 
 const logger = InitLogger();
 
-const CreateServerInstance = () => {
-  const serverInstance = fastify({
+const newServerInstance = () => {
+  return fastify({
     // Logger only for production
     logger: logger,
     querystringParser: str => qs.parse(str),
   });
-
-  setupMiddlewares(serverInstance)
-    .then()
-    .catch(err => {
-      logger.error('Error when setting up middlewares!', err);
-    });
-
-  if (!isProduction) {
-    serverInstance.addHook('preHandler', function (req, reply, done) {
-      if (req.body) {
-        req.log.info({ body: req.body }, 'parsed req body');
-      }
-      done();
-    });
-  }
-
-  return serverInstance;
 };
 
 export class FastifyHttpRequest implements IHttpRequest {
@@ -150,46 +132,46 @@ export class FastifyHttpResponse implements IHttpResponse {
   constructor(_res: FastifyReply) {
     this.type = 'application/json';
     this.res = _res;
-    this._status = 200
+    this._status = 200;
   }
 
   set status(val: number) {
-    this._status = val
-    this.res?.status(val)
+    this._status = val;
+    this.res?.status(val);
   }
 
   notFound(message?: string): IHttpResponse {
-    this.res.send(new httpErrors.NotFound(message))
-    return this
+    this.res.send(new httpErrors.NotFound(message));
+    return this;
   }
 
   badRequest(message?: string): IHttpResponse {
-    this.res.send(new httpErrors.BadRequest(message))
-    return this
+    this.res.send(new httpErrors.BadRequest(message));
+    return this;
   }
 
   serverError(message?: string): IHttpResponse {
-    this.res.send(new httpErrors.InternalServerError(message))
-    return this
+    this.res.send(new httpErrors.InternalServerError(message));
+    return this;
   }
 
   notAuthorized(message?: string): IHttpResponse {
-    this.res.send(new httpErrors.Unauthorized(message))
-    return this
+    this.res.send(new httpErrors.Unauthorized(message));
+    return this;
   }
 
   permissionDenied(message?: string): IHttpResponse {
-    this.res.send(new httpErrors.Forbidden(message))
-    return this
+    this.res.send(new httpErrors.Forbidden(message));
+    return this;
   }
 
   resourceExisted(message?: string): IHttpResponse {
-    this.res.send(new httpErrors.Conflict(message))
-    return this
+    this.res.send(new httpErrors.Conflict(message));
+    return this;
   }
 
   send(payload?: any) {
-    this.res.status(this._status)
+    this.res.status(this._status);
     this.res.send(payload);
   }
 
@@ -233,7 +215,11 @@ export class FastifyHttpServer implements IHttpServer {
   routes: HttpRoute[] = [];
 
   constructor(serverInstance?: any) {
-    this.server = serverInstance || CreateServerInstance();
+    this.server = serverInstance || newServerInstance();
+  }
+
+  public async run() {
+    await setupFastifyMiddlewares(this.server);
   }
 
   listen(port: any): void {
@@ -246,11 +232,11 @@ export class FastifyHttpServer implements IHttpServer {
   ready(listener?: HttpServerListener) {
     if (listener) {
       this.server.ready(err => {
-        listener(err)
-      })
+        listener(err);
+      });
     } else {
       /* return promise */
-      return this.server.ready()
+      return this.server.ready();
     }
   }
 
@@ -259,7 +245,7 @@ export class FastifyHttpServer implements IHttpServer {
   }
 
   async close() {
-    return await this.server.close()
+    return await this.server.close();
   }
 
   get(path: string, handler: HttpHandlerFn): IHttpServer {
@@ -465,7 +451,7 @@ function DoRegisterRoutes(
 }
 
 export class FastityServerFactory implements IHttpServerFactory {
-  createServer(framework?: string, args?: any): IHttpServer {
+  createHttpServer(framework?: string, args?: any): IHttpServer {
     const app = new FastifyHttpServer(args);
     return app;
   }

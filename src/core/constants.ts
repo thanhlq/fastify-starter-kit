@@ -20,5 +20,6 @@ const env = process.env;
 export const isProduction = env.NODE_ENV == PRODUCTION_ENV;
 
 export const MIDDLEWARE_SWAGGER_DOC_CK = 'SWAGGER_DOCS';
-export const MIDDLEWARE_SWAGGER_DOC_ON = 'ON';
-export const MIDDLEWARE_SWAGGER_DOC_OFF = 'OFF';
+export const MIDDLEWARE_STATIC_FILE_CK = 'STATIC_FILE_SERVING';
+export const ON_VALUE = 'ON';
+export const OFF_VALUE = 'OFF';

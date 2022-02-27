@@ -18,13 +18,14 @@ export default class DatabaseManager {
 
       return DatabaseManager._knex;
     } else {
-      console.error('[CRITICAL] [EXIST] You must define the right NODE_ENV: test / development / production')
-      process.exit(1)
+      console.error(
+        '[CRITICAL] [EXIST] You must define the right NODE_ENV: test / development / production',
+      );
+      process.exit(1);
     }
   }
 
-  public static getKnext() : any {
-    return DatabaseManager._knex
+  public static getKnext(): any {
+    return DatabaseManager._knex;
   }
-
 }

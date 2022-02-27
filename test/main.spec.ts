@@ -1,6 +1,5 @@
 import MainServer from '../src/server.js'
 
-
 let app;
 
 describe('This is main test', () => {
