@@ -8,7 +8,7 @@ const a = {
       // "jsx": true,
       "ts": true,
       "modules": true
-  }
+    }
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [

@@ -19,7 +19,7 @@
     "start-dev": "yarn build && yarn build-api-docs && NODE_ENV=development node --trace-warnings dist/src/main.js",
     "start": "NODE_ENV=production node ./dist/src/main.js",
     "lint": "./node_modules/.bin/eslint . --ext .ts,.js",
-    "lint-fix": "./node_modules/.bin/eslint-fix . --ext .ts,.js",
+    "lint-fix": "./node_modules/.bin/eslint --fix . --ext .ts,.js",
     "copyfiles": "copyfiles public/**/*.html public/**/*.js public/**/*.css public/**/*.png config.js src/**/*.yaml src/documents/**/*.yaml src/documents/v1/**/*.yaml dist && copyfiles -a *.env dist",
     "build-api-docs": "openapi bundle src/documents/openapi.yaml --output dist/src/documents/openapi-full.yaml",
     "build-api-docs-dev": "openapi bundle src/documents/openapi.yaml --output src/documents/openapi-full.yaml",
