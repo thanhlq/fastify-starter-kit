@@ -12,7 +12,9 @@
 * [X] DB unit test with Jest / Typescript / ESM
 * [ ] Restful API testing with supertest
 * [X] Static file serving.
-* [X] Node.js 14+
+* [X] Static source code analysis and checks with eslint
+* [X] Source code auto format with prettier
+* [X] Tested with Node.js 14+
 
 ## 2. Installation
 

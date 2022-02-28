@@ -254,31 +254,40 @@ export class FastifyHttpServer implements IHttpServer {
   }
 
   post(path: string, handler: HttpHandlerFn): IHttpServer {
-    throw new Error('Method not implemented.');
+    this.server.post(path, FastifyHandlerWrapper(handler));
+    return this;
   }
 
   put(path: string, handler: HttpHandlerFn): IHttpServer {
-    throw new Error('Method not implemented.');
+    this.server.post(path, FastifyHandlerWrapper(handler));
+    return this;
+  }
+
+  patch(path: string, handler: HttpHandlerFn): IHttpServer {
+    this.server.patch(path, FastifyHandlerWrapper(handler));
+    return this;
   }
 
   delete(path: string, handler: HttpHandlerFn): IHttpServer {
-    throw new Error('Method not implemented.');
+    this.server.delete(path, FastifyHandlerWrapper(handler));
+    return this;
   }
 
   head(path: string, handler: HttpHandlerFn): IHttpServer {
-    throw new Error('Method not implemented.');
+    this.server.head(path, FastifyHandlerWrapper(handler));
+    return this;
   }
 
-  option(path: string, handler: HttpHandlerFn): IHttpServer {
-    throw new Error('Method not implemented.');
+  options(path: string, handler: HttpHandlerFn): IHttpServer {
+    this.server.options(path, FastifyHandlerWrapper(handler));
+    return this;
   }
 
-  registerRoute(routes: HttpRoute, opts: HttpPluginOptions): void {
-    // serverInstance.register(route , opts: HttpPluginOptions)
+  registerRoute(route: HttpRoute, opts: HttpPluginOptions): void {
+    this.registerRoutes([route], opts)
   }
 
   registerRoutes(routes: HttpRoute[], opts: HttpPluginOptions): void {
-    // this.server.register(DoRegisterRoutes(this.server, routes, opts))
     this.server.register(RegisterApiController(routes), opts);
   }
 
@@ -413,40 +422,6 @@ function RegisterApiController(routes: HttpRoute[]) {
         }
       }
     }
-  };
-}
-
-function DoRegisterRoutes(
-  router: FastifyInstance,
-  routes: HttpRoute[],
-  opts: HttpPluginOptions,
-) {
-  // fastify.register(userController, { prefix: '/api/v1/user' });
-
-  // async function userController(router: FastifyInstance) {
-  //   // GET /api/v1/user
-  //   router.get(
-  //     '/',
-  //     async function (req: FastifyRequest, res: FastifyReply) {
-  //       res.send({
-  //         balance: '$3,277.32',
-  //         picture: 'http://placehold.it/32x32',
-  //         age: 30,
-  //         query: req.query,
-  //         name: 'Leonor Cross',
-  //         gender: 'female',
-  //         company: 'GRONK',
-  //         email: 'leonorcross@gronk.com',
-  //       });
-  //     }
-  //   );
-  // }
-
-  return async function RouterMiddleware(router: FastifyInstance) {
-    /**
-     * opts: { prefix: '/api/v1/user' }
-     */
-    router.register(RegisterApiController(routes), opts);
   };
 }
 

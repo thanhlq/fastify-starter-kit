@@ -329,9 +329,10 @@ export interface IHttpServer {
   get(path: string, handler: HttpHandlerFn): IHttpServer;
   post(path: string, handler: HttpHandlerFn): IHttpServer;
   put(path: string, handler: HttpHandlerFn): IHttpServer;
+  patch(path: string, handler: HttpHandlerFn): IHttpServer;
   delete(path: string, handler: HttpHandlerFn): IHttpServer;
   head(path: string, handler: HttpHandlerFn): IHttpServer;
-  option(path: string, handler: HttpHandlerFn): IHttpServer;
+  options(path: string, handler: HttpHandlerFn): IHttpServer;
   registerRoute(route: HttpRoute, opts: HttpPluginOptions): void;
   registerRoutes(routes: HttpRoute[], opts: HttpPluginOptions): void;
   ready(listener?: HttpServerListener);

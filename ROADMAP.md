@@ -58,7 +58,8 @@
 * [X] Static file serving
 * [X] DB unit test with jest / typescript / ESM (Ecmascript module)
 * [X] Convert commonjs type to the ESM (es-module) (for future compatiblity, since es-module can import commonjs but commonjs cannot import es module)
-* [X] Static code analysis with latest Emascript version (2021)
+* [X] Static source code analysis and checks with eslint
+* [X] Ecmascript version (2021) as target
 
 ## V0.1
 
@@ -70,5 +71,6 @@
 * [X] Sample db CRUD
 * [X] OpenAPI 3.0 documentation
 * [X] DB schema generation / migration
-* [X] Auto code format
+* [X] Static source code analysis and checks with eslint
+* [X] Source code auto format with prettier
 * [X] Typescript api documentation / generating
