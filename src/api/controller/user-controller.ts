@@ -1,13 +1,13 @@
 import {
-  IHttpRequest as HttpRequest,
-  IHttpResponse as HttpResponse,
+  IHttpRequest,
+  IHttpResponse,
 } from '../../core/interfaces/http.js';
 import { logger } from '../../core/logger/index.js';
 import User from '../../database/models/User.js';
 
 export { ListUsers, GetUser, GetUserConfig, CreateUser, PatchUser };
 
-async function CreateUser(req: HttpRequest, res: HttpResponse) {
+async function CreateUser(req: IHttpRequest, res: IHttpResponse) {
   const payload = req.body;
 
   const createdUser = await User.query().insert({
@@ -17,7 +17,7 @@ async function CreateUser(req: HttpRequest, res: HttpResponse) {
   res.send(createdUser);
 }
 
-async function GetUser(req: HttpRequest, res: HttpResponse) {
+async function GetUser(req: IHttpRequest, res: IHttpResponse) {
   const userId = req.params.userId;
 
   const user = await User.query().findById(userId);
@@ -29,13 +29,12 @@ async function GetUser(req: HttpRequest, res: HttpResponse) {
   }
 }
 
-async function ListUsers(req: HttpRequest, res: HttpResponse) {
-  const params = req.params;
+async function ListUsers(req: IHttpRequest, res: IHttpResponse) {
   const users = await User.query();
   res.send(users);
 }
 
-async function PatchUser(req: HttpRequest, res: HttpResponse) {
+async function PatchUser(req: IHttpRequest, res: IHttpResponse) {
   const partialPayload = req.body;
   const userId = req.params.userId;
 
@@ -56,7 +55,7 @@ async function PatchUser(req: HttpRequest, res: HttpResponse) {
   }
 }
 
-async function GetUserConfig(req: HttpRequest, res: HttpResponse) {
+async function GetUserConfig(req: IHttpRequest, res: IHttpResponse) {
   res.send({
     role: 'admin',
   });

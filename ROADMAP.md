@@ -48,6 +48,7 @@
 
 ## V0.3
 
+* [X] Health check API (make sure server works OK)
 * [ ] Rest API unit test with [supertest](https://github.com/visionmedia/supertest)
 * [ ] i18n
 * [ ] Dockerization

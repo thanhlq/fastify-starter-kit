@@ -53,11 +53,13 @@ export const InitLogger = () => {
 
 const logger = InitLogger();
 
-const newServerInstance = () => {
+const newServerInstance = (opts?: any) => {
+  opts = opts || {}
   return fastify({
     // Logger only for production
     logger: logger,
     querystringParser: str => qs.parse(str),
+    ...opts
   });
 };
 
@@ -211,11 +213,11 @@ export class FastifyHttpResponse implements IHttpResponse {
  * Fastify implementation.
  */
 export class FastifyHttpServer implements IHttpServer {
-  server: FastifyInstance;
+  public server;
   routes: HttpRoute[] = [];
 
-  constructor(serverInstance?: any) {
-    this.server = serverInstance || newServerInstance();
+  constructor(opts = {}) {
+    this.server = newServerInstance(opts);
   }
 
   public async run() {
@@ -426,7 +428,7 @@ function RegisterApiController(routes: HttpRoute[]) {
 }
 
 export class FastityServerFactory implements IHttpServerFactory {
-  createHttpServer(framework?: string, args?: any): IHttpServer {
+  createHttpServer(args?: any): IHttpServer {
     const app = new FastifyHttpServer(args);
     return app;
   }

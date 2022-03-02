@@ -1,0 +1,1 @@
+export const PLATFORM_CORE_VERSION = '0.0.1.b20220302'

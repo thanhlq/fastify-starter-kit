@@ -36,7 +36,8 @@ async function setupFastifyMiddlewares(fastify: FastifyInstance) {
         const mInstance = await (await import(m.path)).default;
         await mInstance(fastify);
       } catch (e) {
-        logger.error(e, `Error when registering middleware: [${m.path}]`);
+        logger.error(`Error when registering middleware: [${m.path}]`);
+        logger.error(e)
       }
     }
   }

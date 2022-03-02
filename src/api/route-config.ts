@@ -6,6 +6,9 @@ import {
   IHttpResponse,
   IHttpServer,
 } from '../core/interfaces/http.js';
+
+import { handleHealthCheck } from './controller/platform-controller.js'
+
 import {
   CreateUser,
   GetUser,
@@ -32,9 +35,10 @@ const userRoutes = [
 
 const staticFile = [new HttpRoute('get', '/', ServeFile)];
 
-function RegisterRoute(app: IHttpServer) {
+function registerRoute(app: IHttpServer) {
+  app.get('/health', handleHealthCheck)
   app.registerRoutes(userRoutes, { prefix: '/api/v1/users' });
   app.registerRoutes(staticFile, { prefix: '/' });
 }
 
-export default RegisterRoute;
+export default registerRoute;

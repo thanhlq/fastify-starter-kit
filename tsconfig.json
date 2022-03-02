@@ -14,7 +14,6 @@
     // ],
     "types": [
       "node",
-      "mocha",
       "jest"
     ],
     "resolveJsonModule": true,
@@ -32,9 +31,9 @@
     "strictNullChecks": false,
     "skipLibCheck": true,
   },
+  "extends": "fastify-tsconfig",
   "includes": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules",

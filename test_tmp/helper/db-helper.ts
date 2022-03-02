@@ -1,4 +1,4 @@
-import DatabaseManager from '../../src/database/database-manager'
+import DatabaseManager from '../../src/database/database-manager.js'
 // import knex from
 import * as TestDB from './db.json'
 
