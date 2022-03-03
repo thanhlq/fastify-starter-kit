@@ -31,7 +31,6 @@
     "strictNullChecks": false,
     "skipLibCheck": true,
   },
-  "extends": "fastify-tsconfig",
   "includes": [
     "src/**/*.ts"
   ],

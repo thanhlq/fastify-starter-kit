@@ -2,7 +2,7 @@
  * Currently, reuse 'pino' from fastify (if platform-fastity is not used, pino must be added as dependency)
  */
 
-import { pino } from 'pino';
+import pino from 'pino';
 import * as constants from '../constants.js';
 
 const env = process.env;
