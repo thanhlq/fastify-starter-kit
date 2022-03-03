@@ -41,6 +41,7 @@
 
 ## V0.3.1
 
+* [ ] i18n
 * [ ] Cors setup / preflight request
 * [ ] Multipart
 * [ ] Conten security policy
@@ -49,8 +50,8 @@
 ## V0.3
 
 * [X] Health check API (make sure server works OK)
-* [ ] Rest API unit test with [supertest](https://github.com/visionmedia/supertest)
-* [ ] i18n
+* [X] Integration of rest API unit test with [supertest](https://github.com/visionmedia/supertest)
+* [ ] Implement sample user api(s) tests
 * [ ] Dockerization
 
 ## V0.2
