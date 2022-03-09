@@ -13,8 +13,8 @@ const middlewares = [
   },
   {
     path: './fastify-static.js',
-    enabled: !(
-      config[constants.MIDDLEWARE_STATIC_FILE_CK] == constants.OFF_VALUE
+    enabled: (
+      config[constants.MIDDLEWARE_STATIC_FILE_CK] == constants.ON_VALUE
     ),
   },
 ];

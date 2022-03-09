@@ -7,18 +7,16 @@ console.log(JSON.stringify(TestDB.users))
 console.log('json out 2')
 
 export class DbHelper {
-  // 1. erase data
   static knex
 
   public static async setupDb() {
     console.log('INITIALIZING DB CONNECTION....')
     DbHelper.knex = DatabaseManager.init()
-    await this.eraseAllData();
+    await this.eraseAllData(DbHelper.knex);
   }
 
-  public static async eraseAllData() {
+  public static async eraseAllData(knex) {
     console.log('ERASING ALL DB DATA....')
-    const knex = DbHelper.knex
 
     await knex('users_groups').del()
     await knex('groups').del()
@@ -26,7 +24,32 @@ export class DbHelper {
     await knex('organizations').del()
   }
 
-  // 2. insert sample data
+  public static async createTestDatabase() {
+    const knex = DbHelper.knex
+
+    try {
+      const dbConfig = DatabaseManager.getInstance().getDbConfig();
+      await knex.raw(`DROP DATABASE IF EXISTS ${dbConfig.connection.database}`)
+      await knex.raw(`CREATE DATABASE ${dbConfig.connection.database}`)
+    } catch (error) {
+      throw new Error(error)
+    } finally {
+      await knex.destroy()
+    }
+  }
+
+  // Seed the database with schema and data
+  public static async seedTestDatabase() {
+    const knex = DbHelper.knex
+    try {
+      await knex.migrate.latest()
+      await knex.seed.run()
+    } catch (error) {
+      throw new Error(error)
+    } finally {
+      await knex.destroy()
+    }
+  }
 }
 
-export {TestDB}
+export { TestDB }

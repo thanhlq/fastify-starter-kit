@@ -6,7 +6,8 @@
     ],
     "ts-jest": {
       "useESM": true
-    }
+    },
+    "diagnostics": false
   },
   "resolver": "jest-ts-webcompat-resolver",
   "transform": {},

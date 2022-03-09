@@ -39,7 +39,7 @@ async function PatchUser(req: IHttpRequest, res: IHttpResponse) {
   const userId = req.params.userId;
 
   try {
-    const dbResult = await User.forge()
+    const dbResult = await User.forge().$q
       .patch({
         ...partialPayload,
         // Not working (prefered) new Date().toISOString()

@@ -1,6 +1,6 @@
-import { Model, Modifiers, QueryBuilderType } from 'objection';
+import { Model, Modifiers } from 'objection';
 import Address from './Address.js';
-import BaseModel from './BaseModel.js';
+import BaseModel from '../utils/base-model.js';
 import Group from './Group.js';
 import Organization from './Organization.js';
 
@@ -101,7 +101,4 @@ export default class User extends BaseModel {
     },
   });
 
-  static forge<M extends Model>(): QueryBuilderType<User> {
-    return User.query();
-  }
 }

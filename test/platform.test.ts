@@ -13,7 +13,7 @@ afterAll(async () => {
   await app.close()
 });
 
-it("App instantiated", async () => {
+it("App instantiated", () => {
   expect(app).not.toBeNull()
 })
 
@@ -21,7 +21,7 @@ it("GET / health", async () => {
   // const result = await request(app).get("/health");
   const result = await request(host).get("/health");
   const obj = JSON.parse(result.text)
-  console.log(result.text)
+  // console.log(result.text)
   expect(result.statusCode).toEqual(200);
   expect(obj.message).toEqual("OK");
 });
