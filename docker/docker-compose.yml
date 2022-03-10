@@ -1,11 +1,15 @@
 version: '3'
 services:
   sample-app:
-    image: thanhlq/fastify-starter-kit
+    image: thanhlq/fastify-starter-kit:latest
+    depends_on:
+      mysql:
+        condition: service_healthy
     ports:
       - "3000:3000"
     environment:
       - DB_HOST=mysql
+      - DB_PORT=3306
       - DB_NAME=app_db
       - DB_USER=sa
       - DB_PASSWORD=sa214
@@ -14,18 +18,22 @@ services:
   mysql:
     container_name: mysql
     image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
     restart: unless-stopped
     volumes:
-      - /opt/data/mysql8:/var/lib/mysql
-      - ./config:/etc/mysql/conf.d
+      - /opt/data/mysql-dev:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: sa214
       MYSQL_DATABASE: app_db
-      MYSQL_USER: admin
+      MYSQL_USER: sa
       MYSQL_PASSWORD: sa214
     network_mode: "dev-net-214"
     ports:
-      - "3306:3306"
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
   adminer:
     image: adminer:latest
     restart: always
@@ -34,5 +42,4 @@ services:
       - 8089:8080
 networks:
   default:
-    external:
-      name: dev-net-214
+    name: dev-net-214

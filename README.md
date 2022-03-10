@@ -79,7 +79,18 @@ $ yarn build
 $ yarn start
 ```
 
-### 3.4 OPENAPI Document
+### 3.4 Docker
+
+```bash
+# Build docker image
+$ scripts/build-docker-image.sh
+
+# Start container
+$ cd docker
+$ docker-compose up
+```
+
+### 3.5 OPENAPI Document
 
 To generate latest openapi (swagger) docs:
 

@@ -49,6 +49,7 @@ export default {
     client: config.DB_CLIENT || 'mysql',
     connection: {
       host: config.DB_HOST,
+      port: config.DB_PORT || 3306,
       database: config.DB_NAME,
       user: config.DB_USER,
       password: config.DB_PASSWORD
