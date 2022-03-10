@@ -1,4 +1,6 @@
 import { Model } from 'objection';
+import BaseModel from '../utils/base-model.js';
+import { EnhancedQueryBuilder } from '../utils/enhanced-query-builder.js';
 
 export default class Organization extends Model {
   id!: string;
@@ -12,7 +14,10 @@ export default class Organization extends Model {
   website?: string;
   phone?: string;
 
-  static tableName = 'organizations';
+  // static tableName = 'organizations';
+  static get tableName() {
+    return 'organizations';
+  }
 
   static jsonSchema = {
     type: 'object',
@@ -37,4 +42,8 @@ export default class Organization extends Model {
       },
     },
   });
+
+  static forge(attrs?: any) {
+    return new EnhancedQueryBuilder<Organization>(Organization.query(), attrs)
+  }
 }

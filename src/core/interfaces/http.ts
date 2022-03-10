@@ -297,6 +297,42 @@ export class HttpRoute implements IHttpRoute {
     this.handler = handler;
     this.opts = opts;
   }
+
+  public static get(path?: string,
+    handler?: HttpHandlerFn,
+    opts?: any): HttpRoute {
+    return new HttpRoute('get', path, handler, opts)
+  }
+
+  public static head(path?: string,
+    handler?: HttpHandlerFn,
+    opts?: any): HttpRoute {
+    return new HttpRoute('head', path, handler, opts)
+  }
+
+  public static patch(path?: string,
+    handler?: HttpHandlerFn,
+    opts?: any): HttpRoute {
+    return new HttpRoute('patch', path, handler, opts)
+  }
+
+  public static put(path?: string,
+    handler?: HttpHandlerFn,
+    opts?: any): HttpRoute {
+    return new HttpRoute('put', path, handler, opts)
+  }
+
+  public static delete(path?: string,
+    handler?: HttpHandlerFn,
+    opts?: any): HttpRoute {
+    return new HttpRoute('delete', path, handler, opts)
+  }
+
+  public static post(path?: string,
+    handler?: HttpHandlerFn,
+    opts?: any): HttpRoute {
+    return new HttpRoute('post', path, handler, opts)
+  }
 }
 
 export interface HttpServerOptions {

@@ -1,5 +1,5 @@
-import Group from "../src/database/models/Group";
-import { DbHelper } from './db/db-helper';
+import Group from "../../src/database/models/Group";
+import { DbHelper } from '../../test/db/db-helper';
 
 // const host = process.env.HOST || 'http://localhost:3000'
 

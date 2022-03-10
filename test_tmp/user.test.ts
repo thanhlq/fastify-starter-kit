@@ -1,5 +1,5 @@
 import User from '../src/database/models/User';
-import { DbHelper, TestDB } from '../test/db/db-helper'
+import { DbHelper, TestDB } from './db/db-helper'
 
 const users = TestDB.users
 

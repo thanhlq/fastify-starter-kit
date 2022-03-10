@@ -1,20 +1,27 @@
 import Knex from 'knex'
 
-// Description: the purpose of this script is to initialize (then destroy) test database.
+const knexConfig = {
+  client: 'mysql',
+  connection: {
+    host: '172.19.0.2',
+    user: 'root',
+    password: 'sa214',
+    database: 'objection_test'
+  },
+  pool: { min: 0, max: 7 }
+}
 
-const testDatabaseName = 'objection_test'
+process.env.NODE_ENV = 'test'
+const kTestingEnvConfig = knexConfig
+const testDatabaseName = kTestingEnvConfig.connection.database
+
+console.log('TEST DATABASE: ' + kTestingEnvConfig.connection.database)
 
 // Create the database
 async function createTestDatabase() {
-  const knex = Knex({
-    client: 'mysql',
-    connection: {
-      host: '172.19.0.2',
-      user: 'root',
-      password: 'sa214',
-      database: testDatabaseName
-    },
-  })
+  const knex = Knex(kTestingEnvConfig)
+  // not working
+  // global.knex = knex
 
   try {
     await knex.raw(`DROP DATABASE IF EXISTS ${testDatabaseName}`)
@@ -28,15 +35,7 @@ async function createTestDatabase() {
 
 // Seed the database with schema and data
 async function seedTestDatabase() {
-  const knex = Knex({
-    client: 'mysql',
-    connection: {
-      host: '172.19.0.2',
-      user: 'root',
-      password: 'sa214',
-      database: testDatabaseName
-    },
-  })
+  const knex = Knex(kTestingEnvConfig)
 
   try {
     await knex.migrate.latest()

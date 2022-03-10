@@ -5,6 +5,8 @@ import EnhancedQueryBuilder from './enhanced-query-builder.js'
 export default class BaseModel extends Model {
   // id!: string;
 
+  // static tableName: string;
+
   /**
    * A simple helper function to instantiate a new Model without needing new.
    * @ref https://bookshelfjs.org/api.html#Model-static-forge

@@ -62,6 +62,10 @@ $ yarn docs
 ### 3.2 Test
 
 ```bash
+# Start test server (dont need, integrated with concurrently)
+# yarn start-test
+
+# Start to execute the tests
 yarn test
 ```
 

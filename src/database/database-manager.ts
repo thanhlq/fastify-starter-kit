@@ -34,8 +34,6 @@ export default class DatabaseManager {
         // your server this is all you have to do. For multi database systems, see
         // the Model.bindKnex() method.
         Model.knex(this._knex);
-
-        return this._knex;
       } else {
         console.error(
           '[CRITICAL] [EXIST] You must define the right NODE_ENV: test / development / production',

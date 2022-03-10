@@ -11,6 +11,7 @@
   },
   "verbose": true,
   "resolver": "jest-ts-webcompat-resolver",
+  "globalSetup": "<rootDir>/test/global-setup.js",
   "transform": {},
   "extensionsToTreatAsEsm": [
     ".ts"

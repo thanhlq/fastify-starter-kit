@@ -1,7 +1,6 @@
 import Knex from 'knex'
 import { Model } from 'objection'
-// import knex from
-import * as TestDB from './db.json'
+import * as TestDB from '../../test/db/db.json'
 
 console.log('json out 1')
 console.log(JSON.stringify(TestDB.users))
@@ -9,23 +8,29 @@ console.log('json out 2')
 
 const testDatabaseName = 'objection_test'
 
-export class DbHelper {
+export default class DbHelper {
   static knex
 
   public static async setupDb() {
-    console.log('INITIALIZING DB CONNECTION....')
-    DbHelper.knex = Knex({
-      client: 'mysql',
-      connection: {
-        host: '172.19.0.2',
-        user: 'root',
-        password: 'sa214',
-        database: testDatabaseName
-      }
-    })
-    Model.knex(DbHelper.knex)
-    // await this.eraseAllData(DbHelper.knex);
-    return DbHelper.knex;
+    if (!global.knex) {
+      return global.knex;
+    } else {
+      console.log('INITIALIZING DB CONNECTION....')
+      DbHelper.knex = Knex({
+        client: 'mysql',
+        connection: {
+          host: '172.19.0.2',
+          user: 'root',
+          password: 'sa214',
+          database: testDatabaseName
+        }
+      })
+      Model.knex(DbHelper.knex)
+      global.knex = DbHelper.knex;
+      // DbHelper.knex = DatabaseManager.getKnext()
+      // await this.eraseAllData(DbHelper.knex);
+      return DbHelper.knex;
+    }
   }
 
   public static async close() {
@@ -68,4 +73,4 @@ export class DbHelper {
   }
 }
 
-export { TestDB }
+export { TestDB, DbHelper }

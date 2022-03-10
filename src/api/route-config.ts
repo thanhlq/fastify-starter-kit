@@ -10,8 +10,6 @@ import {
   PatchUser
 } from './controller/user-controller.js';
 
-
-
 const userRoutes = [
   new HttpRoute('get', '/', ListUsers),
   new HttpRoute('get', '/:userId', GetUser),
@@ -20,11 +18,7 @@ const userRoutes = [
   new HttpRoute('get', '/config', GetUserConfig),
 ];
 
-// const staticFile = [new HttpRoute('get', '/', ServeFile)];
-
-function registerRoute(app: IHttpServer) {
+export default function CommonRouteRegister(app: IHttpServer) {
   app.get('/health', handleHealthCheck)
   app.registerRoutes(userRoutes, { prefix: '/api/v1/users' });
 }
-
-export default registerRoute;
