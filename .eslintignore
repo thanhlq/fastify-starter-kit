@@ -4,3 +4,8 @@
 **/migrations/**
 **/.vscode/**
 *esllintrc*.*
+**/test/**
+**/test_tmp/**
+**/seeds/**
+**/public/**
+**/samples/**

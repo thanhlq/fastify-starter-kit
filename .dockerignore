@@ -1,0 +1,14 @@
+node_modules
+npm-debug.log
+test
+test_tmp
+src
+scripts
+# migrations
+# seeds
+docs
+.nyc_output
+.vscode
+.ideas
+*.md
+**/samples/**

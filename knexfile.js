@@ -6,13 +6,6 @@ const config = process.env
  * @type { Object.<string, import("knex").Knex.Config> }
  */
 export default {
-
-  // development: {
-  //   client: 'sqlite3',
-  //   connection: {
-  //     filename: './dev.sqlite3'
-  //   }
-  // },
   development: {
     client: 'mysql',
     connection: {
@@ -40,7 +33,7 @@ export default {
     connection: {
       host: config.DB_HOST,
       database: 'objection_staging',
-      user:     'root',
+      user: 'root',
       password: 'sa214'
     },
     pool: {
@@ -53,12 +46,12 @@ export default {
   },
 
   production: {
-    client: 'mysql',
+    client: config.DB_CLIENT || 'mysql',
     connection: {
       host: config.DB_HOST,
-      database: 'objection_prod',
-      user:     'root',
-      password: 'sa214'
+      database: config.DB_NAME,
+      user: config.DB_USER,
+      password: config.DB_PASSWORD
     },
     pool: {
       min: 3,
@@ -68,21 +61,4 @@ export default {
       tableName: 'knex_migrations'
     }
   }
-
-  // production: {
-  //   client: 'postgresql',
-  //   connection: {
-  //     database: 'my_db',
-  //     user:     'username',
-  //     password: 'password'
-  //   },
-  //   pool: {
-  //     min: 2,
-  //     max: 10
-  //   },
-  //   migrations: {
-  //     tableName: 'knex_migrations'
-  //   }
-  // }
-
 };

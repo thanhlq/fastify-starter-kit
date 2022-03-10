@@ -40,8 +40,11 @@
     "./plugins/**/*",
     "./test/**/*",
     "./typings/**/*",
-    "./dist/**/*", // This is what fixed it!
-    "./migrations/**/*", // This is what fixed it!
+    "./dist/**/*",
+    "./migrations/**/*",
+    "./seeds/**/*",
+    "./test_tmp/**/*",
+    "./samples/**/*",
     "**/*.spec.ts"
   ]
 }
