@@ -52,7 +52,7 @@
 * [X] Health check API (make sure server works OK)
 * [X] Integration of rest API unit test with [supertest](https://github.com/visionmedia/supertest)
 * [X] Implement sample user api(s) tests
-* [ ] Dockerization
+* [X] Dockerization
 
 ## V0.2
 

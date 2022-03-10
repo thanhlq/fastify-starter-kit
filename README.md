@@ -102,4 +102,5 @@ yarn build-api-docs
 
 * http://localhost:3000/index.html -> static file serving
 * http://localhost:3000/documentation/ -> api documenation
-* * http://localhost:3000/api/v1/users/ -> sample
+* http://localhost:3000/api/v1/users/ -> sample
+* (docker) adminer: http://localhost:8089
