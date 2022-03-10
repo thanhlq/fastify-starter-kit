@@ -13,8 +13,9 @@ afterAll(async () => {
   await app.close()
 });
 
-it("App instantiated", () => {
+it("App instantiated", (done) => {
   expect(app).not.toBeNull()
+  done()
 })
 
 it("GET / health", async () => {

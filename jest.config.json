@@ -5,10 +5,11 @@
       ".js"
     ],
     "ts-jest": {
-      "useESM": true
-    },
-    "diagnostics": false
+      "useESM": true,
+      "diagnostics": false
+    }
   },
+  "verbose": true,
   "resolver": "jest-ts-webcompat-resolver",
   "transform": {},
   "extensionsToTreatAsEsm": [

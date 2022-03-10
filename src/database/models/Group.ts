@@ -1,8 +1,9 @@
 import { Model } from 'objection';
+import BaseModel from '../utils/base-model.js';
 import Organization from './Organization.js';
 import User from './User.js';
 
-export default class Group extends Model {
+export default class Group extends BaseModel {
   id!: string;
   name!: string;
   code?: string;

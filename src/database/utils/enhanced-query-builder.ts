@@ -1,7 +1,7 @@
 //Thanh LE
 
 import { QueryBuilderType } from "objection";
-import BaseModel from "./base-model";
+import BaseModel from "./base-model.js";
 
 /**
  * Why? for encapsulation of lower level api.

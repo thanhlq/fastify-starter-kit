@@ -5,7 +5,7 @@ const users = TestDB.users
 
 
 beforeAll(async () => {
-  await DbHelper.setupDb()
+  return await DbHelper.setupDb()
 });
 
 // afterAll(async () => {

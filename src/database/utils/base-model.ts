@@ -3,7 +3,7 @@ import EnhancedQueryBuilder from './enhanced-query-builder.js'
 
 
 export default class BaseModel extends Model {
-  id!: string;
+  // id!: string;
 
   /**
    * A simple helper function to instantiate a new Model without needing new.

@@ -5,6 +5,7 @@ import Group from './Group.js';
 import Organization from './Organization.js';
 
 export default class User extends BaseModel {
+  id!: string;
   firstName?: string;
   lastName?: string;
   age?: number;
