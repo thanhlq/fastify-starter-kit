@@ -1,51 +1,70 @@
 # ROADMAP
 
-## V0.10
+## V0.14
+
+* [ ] gRPC
+
+## V0.13
+
+* [ ] WebSocket
+* [ ] WebSocket authentication
+
+## V0.12
 
 * [ ] File upload/download service
 
-## V0.9
+## V0.11
 
-* [ ] Background task / cronjob
+* [ ] Background task / cronjob / scheiduling
 
-## V0.8
+## V0.10
 
 * [ ] K8s deployment
 
-## V0.7
+## V0.9
 
-* [ ] Docker deployment
+* [ ] Notifications (firebase?)
 * [ ] serverless deployment
 
-## V0.6
+## V0.8
 
 * [ ] RBAC / policy -> Sang IS6 integration or ?
 
-## V0.5
+## V0.7
 
 * [ ] Auth -> Sang / IS6
-* [ ] Session
-* [ ] Pubsub / cache
 * [ ] Inbound schema validator / based on openapi 3.x or json schema
 
-## V0.4
+## V0.6
+
+* [ ] Pubsub / cache
+* [ ] Session
+
+## V0.5
 
 * [ ] XSS
 * [ ] CSRF protection
+
+## V0.4
+
 * [ ] Header protection / security practices / Helmet
 * [ ] Rate limit
 
+## V0.3.3
+
+* [ ] Real-world deployments (serverless?, dapr/k8s)
+
 ## V0.3.2
 
-* [ ] API performance test
+* [ ] API performance test (time, system usage)
 
 ## V0.3.1
 
+* [ ] Model mapping field name vs db field name
 * [ ] i18n
 * [ ] Cors setup / preflight request
 * [ ] Multipart
 * [ ] Conten security policy
-* [ ] Real work testing (deploying / hosting)
 
 ## V0.3
 
