@@ -9,7 +9,7 @@
       "diagnostics": false
     }
   },
-  "verbose": true,
+  "verbose": false,
   "resolver": "jest-ts-webcompat-resolver",
   "globalSetup": "<rootDir>/test/global-setup.js",
   "transform": {},

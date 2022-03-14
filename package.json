@@ -27,10 +27,9 @@
     "build-api-docs": "openapi bundle src/documents/openapi.yaml --output dist/src/documents/openapi-full.yaml",
     "build-api-docs-dev": "openapi bundle src/documents/openapi.yaml --output src/documents/openapi-full.yaml",
     "docs": "./node_modules/.bin/typedoc --out docs --entryPoints src/app.ts",
-    "test": "./node_modules/.bin/concurrently  \"yarn start-test\" \"yarn test-go\"",
-    "test-go": "rm -rf .env && cp test.env .env && yarn jest",
-    "tap": "yarn build-test && NODE_OPTIONS=--experimental-vm-modules ./node_modules/.bin/tap --ts test/**/*.test.ts",
-    "jest": "NODE_OPTIONS=--experimental-vm-modules ./node_modules/.bin/jest --verbose --runInBand --logHeapUsage",
+    "test": "./node_modules/.bin/concurrently  \"yarn start-test\" \"yarn test-run\"",
+    "test-run": "yes | cp -rf test.env .env && yarn jest",
+    "jest": "NODE_OPTIONS=--experimental-vm-modules ./node_modules/.bin/jest --runInBand --logHeapUsage",
     "jest-debug": "NODE_OPTIONS=--experimental-vm-modules node --trace-warnings ./node_modules/.bin/jest",
     "mocha-ts": "TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'src/test/**/*.ts'"
   },

@@ -1,7 +1,11 @@
 import { Model } from 'objection';
 import EnhancedQueryBuilder from './enhanced-query-builder.js'
 
-
+/**
+ * @deprecated Currently, issue: if inherite from this class then objection does not see the static property*.
+ *
+ * @todo to find solution later.
+ */
 export default class BaseModel extends Model {
   // id!: string;
 

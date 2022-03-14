@@ -67,7 +67,7 @@ export default class EnhancedQueryBuilder<M extends BaseModel> {
     if (this.isPostgres()) {
       return BaseModel.query().insert(rows)
     } else {
-      const k = BaseModel.knex();
+      // const k = BaseModel.knex();
       // const chunkSize = 30;
       // return k.batchInsert(rows)
     }

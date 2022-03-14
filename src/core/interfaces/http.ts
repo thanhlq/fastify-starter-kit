@@ -262,10 +262,7 @@ export type HttpHandlerFn = (
 
 export type HttpServerListener = (err: Error) => void;
 
-export async function HttpHandlerFnNull(
-  req: IHttpRequest,
-  res: IHttpResponse,
-): Promise<any> {
+export async function HttpHandlerFnNull(/* req: IHttpRequest, res: IHttpResponse */): Promise<any> {
   return Promise.resolve(true);
 }
 

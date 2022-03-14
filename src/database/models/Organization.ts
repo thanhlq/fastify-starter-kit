@@ -1,5 +1,4 @@
 import { Model } from 'objection';
-import BaseModel from '../utils/base-model.js';
 import { EnhancedQueryBuilder } from '../utils/enhanced-query-builder.js';
 
 export default class Organization extends Model {
