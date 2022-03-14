@@ -1,24 +1,3 @@
-# MANUAL TEST
-
-```bash
-yarn dev
-```
-
-## CREATE USER
-
-```bash
-curl --location --request POST 'http://localhost:3000/api/v1/users' \
---header 'Content-Type: application/json' \
---data-raw '{
-"firstName": "Thanh",
-"lastName": "LE",
-"profile": {"interest": ["tennis", "beer"]},
-"email": "thanhlq@gmail.com"
-}'
-
-
-# sample output
-
 [
   {
     "id": "jubcmEvCxhDPQlxLI_YcR",
@@ -44,11 +23,3 @@ curl --location --request POST 'http://localhost:3000/api/v1/users' \
     "isFemale": false
   }
 ]
-```
-
-
-
-```bash
-curl --location --request GET 'http://localhost:3000/api/v1/users' \
---header 'Content-Type: application/json'
-```

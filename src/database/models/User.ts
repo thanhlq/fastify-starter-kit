@@ -8,14 +8,43 @@ export default class User extends BaseModel {
   id!: string;
   firstName?: string;
   lastName?: string;
+  gender?: string;
   age?: number;
 
   organization?: Organization;
   organizations?: Organization[];
+
   groups?: Group[];
+
+  /**
+   * Getters and methods listed here are serialized with real properties when toJSON is called. Virtual attribute methods and getters must be synchronous.
+   * The virtual values are not written to database. Only the "external" JSON format will contain them.
+   */
+  static get virtualAttributes() {
+    return ['fullName', 'isFemale'];
+  }
+
+  fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
+  get isFemale() {
+    return this.gender === 'female';
+  }
+
+  get isGenderUnknown() {
+    return this.gender === 'unknown';
+  }
 
   // Table name is the only required property.
   static tableName = 'users';
+
+  /**
+   * Sample for your ref, infact, id is by default.
+   */
+  static get idColumn() {
+    return 'id';
+  }
 
   // Optional JSON schema. This is not the database schema! Nothing is generated
   // based on this. This is only used for validation. Whenever a model instance

@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import {
   IHttpRequest,
   IHttpResponse,
@@ -12,6 +13,7 @@ async function CreateUser(req: IHttpRequest, res: IHttpResponse) {
 
   const createdUser = await User.query().insert({
     ...payload,
+    id: nanoid()
   });
 
   res.send(createdUser);

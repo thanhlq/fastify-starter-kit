@@ -1,7 +1,7 @@
 // Thanh LE
 
 import Knex from 'knex';
-import { Model } from 'objection';
+import { Model, knexSnakeCaseMappers } from 'objection';
 import knexConfig from '../../knexfile.js';
 import { logger } from '../core/logger/index.js';
 import { COCKROACH_DB, MS_SQL_SERVER_DB, MYSQL_DB, POSTGRESQL_DB } from './db-contants.js';
@@ -29,7 +29,10 @@ export default class DatabaseManager {
       if (env) {
         this._dbConfig = knexConfig[env] as IDbConfigugration;
         logger.info(this._dbConfig, 'Db configurations')
-        this._knex = Knex(this._dbConfig);
+        this._knex = Knex({
+          ...this._dbConfig,
+          ...knexSnakeCaseMappers({ upperCase: false })
+        });
         // Bind all Models to a knex instance. If you only have one database in
         // your server this is all you have to do. For multi database systems, see
         // the Model.bindKnex() method.

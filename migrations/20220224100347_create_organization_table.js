@@ -19,7 +19,7 @@ const up = function (knex) {
     .createTable('organizations', (table) => {
       defineRequiredColumns(knex, table)
       table
-        .string('parentId',)
+        .string('parent_id',)
         .references('id')
         .inTable('organizations')
         .onDelete('SET NULL')

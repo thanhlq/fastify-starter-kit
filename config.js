@@ -5,24 +5,35 @@
 import * as dotenv from 'dotenv';
 // import * as path from 'path'
 import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
-
-dotenv.config();
+import path, { dirname, resolve } from 'path';
+import fs from 'fs'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const appPath = resolve(__dirname)
-const buildPath = resolve(__dirname, 'dist')
+// const buildPath = resolve(__dirname, 'dist')
 
+const dotEnvFile = path.join(appPath, '.env')
 console.log('ROOT APP PATH: ' + appPath)
-console.log('BUILD PATH: ' + buildPath)
 
+try {
+  console.log('.env file: ' + dotEnvFile)
+  if (fs.existsSync(dotEnvFile)) {
+    dotenv.config({debug: true, path: dotEnvFile})
+  } else {
+    console.error('.env file not existed: ' + dotEnvFile)
+  }
+} catch(err) {
+  console.error(err)
+}
+
+// console.log('BUILD PATH: ' + buildPath)
 process.env.APP_ROOT = global.appRoot = appPath
 
 export {
   appPath,
-  buildPath
+  // buildPath
 }
 
 export default appPath;

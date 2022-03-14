@@ -23,7 +23,7 @@ const up = function(knex) {
     table.string('name')
     table.string('code')
     table
-    .string('parentId', idLength)
+    .string('parent_id', idLength)
       .references('id')
       .inTable('groups')
       .onDelete('SET NULL')
@@ -32,13 +32,13 @@ const up = function(knex) {
   .createTable('users_groups', (table) => {
     defineRequiredColumns(knex, table)
     table
-      .string('userId', idLength)
+      .string('user_id', idLength)
       .references('id')
       .inTable('users')
       .onDelete('CASCADE')
       .index()
     table
-      .string('groupId', idLength)
+      .string('group_id', idLength)
       .references('id')
       .inTable('groups')
       .onDelete('CASCADE')
