@@ -10,7 +10,7 @@
 * [ ] Common securities (xss, rate limit, csrf, csp, header protection)
 * [X] OpenAPI 3.0 documentation in a modular way
 * [X] DB unit test with Jest / Typescript / ESM
-* [ ] Restful API testing with supertest
+* [X] Restful API testing with supertest
 * [X] Static file serving.
 * [X] Static source code analysis and checks with eslint
 * [X] Source code auto format with prettier

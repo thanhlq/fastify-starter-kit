@@ -9,6 +9,7 @@ import { IncomingHttpHeaders } from 'http';
 import qs from 'qs';
 import pino from 'pino';
 import * as httpErrors from 'http-errors';
+import * as _ from 'lodash'
 
 import {
   HttpHandlerFn,
@@ -102,6 +103,15 @@ export class FastifyHttpRequest implements IHttpRequest {
     this.isProduction = isProduction;
   }
 
+  get server() {
+    return this.req.server;
+  }
+
+  /** fastify-polyglot middleware must be registered */
+  get i18n() {
+    return this.req.server['i18n'];
+  }
+
   /**
    * Get header.
    *
@@ -118,6 +128,10 @@ export class FastifyHttpRequest implements IHttpRequest {
     }
 
     return h;
+  }
+
+  toJson = () => {
+    return _.omit(this, [ 'server' ]);
   }
 }
 
@@ -299,6 +313,10 @@ export class FastifyHttpServer implements IHttpServer {
 
   setServerInstance(server: any) {
     this.server = server;
+  }
+
+  get i18n() {
+    return this.server.i18n;
   }
 }
 

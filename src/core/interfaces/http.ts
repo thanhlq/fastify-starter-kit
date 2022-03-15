@@ -140,6 +140,10 @@ export interface IHttpRequest {
    */
   charset?: string;
 
+  server?;
+
+  i18n?;
+
   //
   /**
    * Get request Content-Type void of parameters such as "charset".

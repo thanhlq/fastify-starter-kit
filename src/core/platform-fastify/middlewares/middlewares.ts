@@ -17,6 +17,10 @@ const middlewares = [
       config[constants.MIDDLEWARE_STATIC_FILE_CK] == constants.ON_VALUE
     ),
   },
+  {
+    path: './fastify-i18n.js',
+    enabled: true,
+  },
 ];
 
 async function setupFastifyMiddlewares(fastify: FastifyInstance) {

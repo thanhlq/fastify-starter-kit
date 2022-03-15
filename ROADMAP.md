@@ -11,6 +11,7 @@
 
 ## V0.12
 
+* [ ] Multipart
 * [ ] File upload/download service
 
 ## V0.11
@@ -60,10 +61,9 @@
 
 ## V0.3.1
 
-* [ ] Model mapping field name vs db field name
-* [ ] i18n
+* [X] Model mapping field name vs db field name
+* [X] i18n
 * [ ] Cors setup / preflight request
-* [ ] Multipart
 * [ ] Conten security policy
 
 ## V0.3

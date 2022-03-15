@@ -28,7 +28,7 @@ export default class DatabaseManager {
 
       if (env) {
         this._dbConfig = knexConfig[env] as IDbConfigugration;
-        logger.info(this._dbConfig, 'Db configurations')
+        logger.debug(this._dbConfig, 'Db configurations')
         this._knex = Knex({
           ...this._dbConfig,
           ...knexSnakeCaseMappers({ upperCase: false })

@@ -46,9 +46,18 @@ curl --location --request POST 'http://localhost:3000/api/v1/users' \
 ]
 ```
 
-
+## Test Get User
 
 ```bash
 curl --location --request GET 'http://localhost:3000/api/v1/users' \
 --header 'Content-Type: application/json'
+```
+
+## Test Language
+
+// not working yet, set at begining worked.
+
+```bash
+curl --location --request GET 'http://localhost:3000/health' \
+--header 'Content-Type: application/json' -H 'Accept-Language: kr'
 ```
